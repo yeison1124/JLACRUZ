@@ -133,7 +133,7 @@ function setupCarousel({ outerId, trackId, dotsId, prevId, nextId }) {
     setTimeout(adjustInfinity, 560);
   }
 
-  function startAuto() { autoTimer = setInterval(next, 3000); }
+  function startAuto() { autoTimer = setInterval(next, 1800); }
   function stopAuto()  { clearInterval(autoTimer); }
   function resetAuto() { stopAuto(); startAuto(); }
 
@@ -172,11 +172,15 @@ function setupCarousel({ outerId, trackId, dotsId, prevId, nextId }) {
   window.addEventListener('mousemove', e => { if (isDrag) onDragMove(e.clientX); });
   window.addEventListener('mouseup',   e => onDragEnd(e.clientX));
 
-  outer.addEventListener('touchstart', e => { stopAuto(); onDragStart(e.touches[0].clientX); }, { passive: true });
+  outer.addEventListener('touchstart', e => onDragStart(e.touches[0].clientX), { passive: true });
   outer.addEventListener('touchmove',  e => onDragMove(e.touches[0].clientX),  { passive: true });
-  outer.addEventListener('touchend',   e => { onDragEnd(e.changedTouches[0].clientX); startAuto(); });
+  outer.addEventListener('touchend',   e => { onDragEnd(e.changedTouches[0].clientX); });
 
-  track.querySelectorAll('img').forEach(img => img.addEventListener('dragstart', e => e.preventDefault()));
+  track.querySelectorAll('img').forEach(img => {
+    img.addEventListener('dragstart', e => e.preventDefault());
+    img.addEventListener('touchstart', () => stopAuto(), { passive: true });
+    img.addEventListener('touchend', () => startAuto(), { passive: true });
+  });
 
   window.addEventListener('resize', () => goTo(idx), { passive: true });
 
