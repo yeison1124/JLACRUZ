@@ -39,7 +39,7 @@ function setupCarousel({ outerId, trackId, dotsId, prevId, nextId }) {
   const CARD_W = 310 + GAP;
   const ORIGINAL_CARDS = Array.from(track.children);
   const REAL_TOTAL = ORIGINAL_CARDS.length;
-  const CLONE_COUNT = Math.min(REAL_TOTAL, 3);
+  const CLONE_COUNT = REAL_TOTAL; // Clonar todas las imágenes para permitir loop infinito en pantallas anchas
   const total = REAL_TOTAL + CLONE_COUNT * 2;
 
   // Create clones for infinite looping.
@@ -149,6 +149,7 @@ function setupCarousel({ outerId, trackId, dotsId, prevId, nextId }) {
   });
 
   function onDragStart(x) {
+    stopAuto();
     isDrag = true; startX = x; startTX = currentTX;
     track.style.transition = 'none';
     outer.style.cursor = 'grabbing';
@@ -176,10 +177,8 @@ function setupCarousel({ outerId, trackId, dotsId, prevId, nextId }) {
   outer.addEventListener('touchmove',  e => onDragMove(e.touches[0].clientX),  { passive: true });
   outer.addEventListener('touchend',   e => { onDragEnd(e.changedTouches[0].clientX); });
 
-  track.querySelectorAll('img').forEach(img => {
-    img.addEventListener('dragstart', e => e.preventDefault());
-    img.addEventListener('touchstart', () => stopAuto(), { passive: true });
-    img.addEventListener('touchend', () => startAuto(), { passive: true });
+  track.querySelectorAll('.service-card').forEach(card => {
+    card.addEventListener('dragstart', e => e.preventDefault());
   });
 
   window.addEventListener('resize', () => goTo(idx), { passive: true });
