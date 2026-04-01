@@ -1,331 +1,392 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>J. LACRUZ C.A. | Multiservicios</title><link rel="image/favicon.ico" type="image/favicon.ico" href="favicon.ico"><link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="./styles/style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>J. LACRUZ C.A. | Multiservicios</title>
+  <link rel="image/favicon.ico" type="image/favicon.ico" href="favicon.ico">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="./styles/style.css" />
 </head>
+
 <body>
 
-<!-- NAVBAR -->
-<nav id="navbar">
-  <a href="#inicio" class="nav-logo">
-    <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="nav-logo-img" />
-    <div class="nav-brand">J. LACRUZ C.A.<span>MULTISERVICIOS</span></div>
-  </a>
-  <ul class="nav-links">
-    <li><a href="#inicio">Inicio</a></li>
-    <li><a href="#quienes">Quiénes Somos</a></li>
-    <li><a href="#servicios">Servicios</a></li>
-    <li><a href="#clientes">Clientes</a></li>
-    <li><a href="#contacto">Contacto</a></li>
-  </ul>
-  <div class="nav-phone">📞 0424-5085666</div>
-  <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
-</nav>
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#inicio" class="nav-logo">
+      <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="nav-logo-img" />
+      <div class="nav-brand">J. LACRUZ C.A.<span>MULTISERVICIOS</span></div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#inicio">Inicio</a></li>
+      <li><a href="#quienes">Quiénes Somos</a></li>
+      <li><a href="#servicios">ServiciosOSO</a></li>
+      <li><a href="#clientes">Clientes</a></li>
+      <li><a href="#contacto">Contacto</a></li>
+    </ul>
+    <div class="nav-phone">📞 0424-5085666</div>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </nav>
 
-<div class="mobile-menu" id="mobileMenu">
-  <ul>
-    <li><a href="#inicio"    onclick="toggleMenu()">Inicio</a></li>
-    <li><a href="#quienes"   onclick="toggleMenu()">Quiénes Somos</a></li>
-    <li><a href="#servicios" onclick="toggleMenu()">Servicios</a></li>
+  <div class="mobile-menu" id="mobileMenu">
+    <ul>
+      <li><a href="#inicio" onclick="toggleMenu()">Inicio</a></li>
+      <li><a href="#quienes" onclick="toggleMenu()">Quiénes Somos</a></li>
+      <li><a href="#servicios" onclick="toggleMenu()">Servicios</a></li>
 
-    <li><a href="#clientes"  onclick="toggleMenu()">Clientes</a></li>
-    <li><a href="#contacto"  onclick="toggleMenu()">Contacto</a></li>
-    <li><a href="tel:04245085666">📞 0424-5085666</a></li>
-  </ul>
-</div>
-
-<!-- HERO -->
-<section class="hero" id="inicio">
-  <div class="hero-bg"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-logo-icon h-a h-a1" style="margin-bottom:1rem">
-      <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" />
-    </div>
-    <span class="hero-tag h-a h-a2">2024 · Venezuela</span>
-    <h1 class="h-a h-a3">J. LACRUZ<br><em>C.A.</em></h1>
-    <p class="hero-sub h-a h-a4">Multiservicios · Soluciones Integrales</p>
-    <p class="hero-desc h-a h-a5">Especialistas en gestión integral de infraestructuras. Garantizamos ambientes limpios, seguros y plenamente operativos para su empresa y comunidad.</p>
-    <div class="hero-icons h-a h-a6">
-      <div class="hero-icon-item">
-        <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z"/></svg>
-        <span>Mantenimiento</span>
-      </div>
-      <div class="hero-icon-item">
-        <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1 0-1.72.1-2.34.2C14.07 13.42 15.58 11 17 8z"/></svg>
-        <span>Jardinería</span>
-      </div>
-      <div class="hero-icon-item">
-        <svg viewBox="0 0 24 24"><path d="M19 9h-2V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm-7 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 9V7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9z"/></svg>
-        <span>Limpieza</span>
-      </div>
-      <div class="hero-icon-item">
-        <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 5.25-5 13-5 13S7 12.25 7 7a5 5 0 015-5zm0 7a2 2 0 100-4 2 2 0 000 4z"/></svg>
-        <span>Plomería</span>
-      </div>
-      <div class="hero-icon-item">
-        <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z"/></svg>
-        <span>Fumigación</span>
-      </div>
-    </div>
-    <div class="h-a h-a7"><a href="#contacto" class="btn-primary">Solicitar Presupuesto</a></div>
-  </div>
-  <div class="hero-ticker">
-    <div class="ticker-track">
-      <span>Limpieza</span><span>Desmalezados</span><span>Pico y Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
-      <span>Limpieza</span><span>Desmalezados</span><span>Pico y Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
-    </div>
-  </div>
-</section>
-
-<!-- QUIÉNES SOMOS -->
-<section class="quienes" id="quienes">
-  <div class="quienes-bg"></div>
-  <div class="quienes-overlay"></div>
-  <div class="quienes-content">
-    <div data-anim="zoom-in" style="margin-bottom:1.2rem">
-      <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="section-logo" />
-    </div>
-    <span class="section-eyebrow" data-anim="fade-down" data-delay="1">Sobre Nosotros</span>
-    <h2 data-anim="fade-up" data-delay="2">¿Quiénes<br>Somos?</h2>
-    <p data-anim="fade-up" data-delay="3">En <strong>J.LACRUZ C.A.</strong>, nos especializamos en la gestión integral de infraestructuras. Entendemos que la imagen y el funcionamiento de su espacio son críticos para su éxito. Por ello, ofrecemos un equipo multidisciplinario dedicado a garantizar ambientes limpios, seguros y plenamente operativos.</p>
-  </div>
-</section>
-
-<!-- SERVICIOS -->
-<section class="servicios" id="servicios">
-  <div class="section-header">
-    <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Lo que hacemos</span>
-    <h2 data-anim="fade-up" data-delay="1">Nuestros Servicios</h2>
-    <p data-anim="fade-up" data-delay="2">Soluciones integrales diseñadas para mantener su infraestructura en óptimas condiciones.</p>
-    <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
+      <li><a href="#clientes" onclick="toggleMenu()">Clientes</a></li>
+      <li><a href="#contacto" onclick="toggleMenu()">Contacto</a></li>
+      <li><a href="tel:04245085666">📞 0424-5085666</a></li>
+    </ul>
   </div>
 
-  <div class="carousel-outer" id="carouselOuter">
-    <div class="carousel-track" id="carouselTrack">
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/limpieza.jpg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>HIGIENE Y DESINFECCIÓN DE ALTO NIVEL</h3>
-          <p class="service-desc">Más que limpieza, ofrecemos ambientes saludables. Ejecutamos protocolos de aseo profundo en áreas administrativas, pasillos, fachadas y cristales. Utilizamos insumos de alta calidad para preservar superficies y el bienestar de su equipo.</p>
+  <!-- HERO -->
+  <section class="hero" id="inicio">
+    <div class="hero-bg"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-logo-icon h-a h-a1" style="margin-bottom:1rem">
+        <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" />
+      </div>
+      <span class="hero-tag h-a h-a2">2024 · Venezuela</span>
+      <h1 class="h-a h-a3">J. LACRUZ<br><em>C.A.</em></h1>
+      <p class="hero-sub h-a h-a4">Multiservicios · Soluciones Integrales</p>
+      <p class="hero-desc h-a h-a5">Especialistas en gestión integral de infraestructuras. Garantizamos ambientes
+        limpios, seguros y plenamente operativos para su empresa y comunidad.</p>
+      <div class="hero-icons h-a h-a6">
+        <div class="hero-icon-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
+          </svg>
+          <span>Mantenimiento</span>
+        </div>
+        <div class="hero-icon-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1 0-1.72.1-2.34.2C14.07 13.42 15.58 11 17 8z" />
+          </svg>
+          <span>Jardinería</span>
+        </div>
+        <div class="hero-icon-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M19 9h-2V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm-7 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 9V7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9z" />
+          </svg>
+          <span>Limpieza</span>
+        </div>
+        <div class="hero-icon-item">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 2a5 5 0 015 5c0 5.25-5 13-5 13S7 12.25 7 7a5 5 0 015-5zm0 7a2 2 0 100-4 2 2 0 000 4z" />
+          </svg>
+          <span>Plomería</span>
+        </div>
+        <div class="hero-icon-item">
+          <svg viewBox="0 0 24 24">
+            <path
+              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
+          </svg>
+          <span>Fumigación</span>
         </div>
       </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/jardineria.jpeg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>GESTIÓN DE ÁREAS VERDES Y PAISAJISMO</h3>
-          <p class="service-desc">Mantenemos la estética y salud de sus exteriores. Incluye desmalezamiento preventivo, poda técnica y mantenimiento de jardines. Proyecte una entrada impecable para su establecimiento.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/sistemas-hidraulicos.jpg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>SISTEMAS HIDRÁULICOS</h3>
-          <p class="service-desc">Garantizamos el corazón de su edificación. Mantenimiento preventivo y correctivo de bombas y tanques para un flujo de agua constante y eficiente. Evite paradas de emergencia con nuestro monitoreo técnico especializado.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/fumigador.png')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>CONTROL INTEGRAL DE PLAGAS Y BIOSEGURIDAD</h3>
-          <p class="service-desc">Protegemos su patrimonio y la salud de sus clientes. Implementamos programas de fumigación contra insectos y roedores bajo normas de seguridad con productos certificados que no interrumpen su operación diaria.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/tanques.jpeg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>SOLUCIONES EN PLOMERÍA Y SANITARIOS</h3>
-          <p class="service-desc">Atención inmediata en plomería y mantenimiento de baños. Resolvemos desde filtraciones hasta instalaciones complejas, asegurando que sus sistemas sanitarios funcionen a la perfección 24/7.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/aseo-limpieza.jpg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>SUMINISTROS Y PRODUCTOS DE LIMPIEZA PROFESIONAL</h3>
-          <p class="service-desc">Máxima higiene con productos al mayor y detalle. Fórmulas de alta eficiencia para grandes superficies, oficinas y hogares. Calidad profesional disponible para su empresa y comunidad.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/escombros.jpeg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>LOGÍSTICA DE DESECHOS Y CARGA DE ESCOMBROS</h3>
-          <p class="service-desc">Despeje eficiente de áreas en obra o mantenimiento. Nos encargamos de recolección, carga y retiro de escombros de forma organizada y responsable, dejando sus espacios libres de residuos.</p>
-        </div>
-      </div>
-
-      <div class="service-card">
-        <div class="service-card-bg" style="background-image:url('img/botellones.jpg')"></div>
-        <div class="service-card-overlay"></div>
-        <div class="service-card-content">
-          <h3>DISTRIBUCIÓN DE INSUMOS Y AGUA POTABLE</h3>
-          <p class="service-desc">Cadena de suministro garantizada. Proveemos productos de limpieza industrial y distribuimos agua potable (botellones y cisternas) con entrega confiable a su puerta.</p>
-        </div>
-      </div>
-
-      
-
+      <div class="h-a h-a7"><a href="#contacto" class="btn-primary">Solicitar Presupuesto</a></div>
     </div>
-  </div>
-
-  <div class="carousel-dots" id="carouselDots"></div>
-
-
-
-<!-- CLIENTES -->
-<section class="clientes" id="clientes">
-  <div class="clientes-watermark">
-    <svg viewBox="0 0 200 200" fill="none"><text x="10" y="120" font-family="Barlow Condensed" font-size="90" font-weight="900" fill="#0a1628">JL</text></svg>
-  </div>
-  <div class="section-header" style="position:relative;z-index:1">
-    <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Nuestros Clientes</span>
-    <h2 data-anim="fade-up" data-delay="1">Clientes que Respaldan<br>Nuestra Experiencia</h2>
-    <p data-anim="fade-up" data-delay="2">Hemos servido a instituciones y empresas de gran envergadura garantizando resultados óptimos bajo los más altos estándares de exigencia.</p>
-    <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
-  </div>
-  <div class="clientes-grid" style="position:relative;z-index:1">
-    <div class="cliente-logo" data-anim="flip-up" data-delay="1">
-      <div class="cliente-logo-inner">
-        <div class="logo-name" style="color:#003087;font-size:1.4rem;">cantv</div>
-        <div class="logo-sub">🇻🇪 Venezuela</div>
+    <div class="hero-ticker">
+      <div class="ticker-track">
+        <span>Limpieza</span><span>Desmalezados</span><span>Pico y
+          Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos
+          de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
+        <span>Limpieza</span><span>Desmalezados</span><span>Pico y
+          Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos
+          de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
       </div>
     </div>
-    <div class="cliente-logo" data-anim="flip-up" data-delay="2" style="background:linear-gradient(135deg,#c0392b,#922b21);border-color:#c0392b;border-radius:50%;width:100px;height:100px;flex-shrink:0;">
-      <div class="cliente-logo-inner">
-        <div class="logo-name" style="color:white;font-size:0.65rem;line-height:1.3">CERVECERÍA<br>REGIONAL</div>
-      </div>
-    </div>
-    <div class="cliente-logo" data-anim="flip-up" data-delay="3" style="width:200px">
-      <div class="cliente-logo-inner">
-        <div class="logo-name" style="color:#1a6b2a;font-size:0.65rem;line-height:1.4">Alcaldía Bolivariana<br>Municipio Palavecino</div>
-      </div>
-    </div>
-    <div class="cliente-logo" data-anim="flip-up" data-delay="4">
-      <div class="cliente-logo-inner">
-        <div class="logo-name" style="color:#d4a017;font-size:1.3rem;">M</div>
-        <div class="logo-sub">Grupo Marpat</div>
-      </div>
-    </div>
-    <div class="cliente-logo" data-anim="flip-up" data-delay="5">
-      <div class="cliente-logo-inner">
-        <div class="logo-name" style="color:var(--blue);font-size:1rem;font-style:italic;">Mb</div>
-        <div class="logo-sub">Zoluciones C.A.</div>
-      </div>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- CONTACTO -->
-<section class="contacto" id="contacto">
-  <div class="contacto-bg"></div>
-  <div class="contacto-overlay"></div>
-  <div class="contacto-content">
-    <div data-anim="zoom-in" style="margin-bottom:1.5rem">
-      <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="section-logo" />
-    </div>
-    <span class="section-eyebrow" data-anim="fade-left" data-delay="1">Contáctenos</span>
-    <h2 data-anim="fade-up" data-delay="2">Estamos Listos para<br>Ser Su Aliado<br>Estratégico.</h2>
-    <p class="contacto-tagline" data-anim="fade-up" data-delay="3">Solicite una inspección técnica o presupuesto a la medida de sus necesidades.</p>
-    <div class="contact-grid">
-      <div class="contact-info" data-anim="fade-right" data-delay="3">
-        <div class="contact-item">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-          0424-5085666
-        </div>
-        <div class="contact-item">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          JLACRUZCA@GMAIL.COM
-        </div>
-        <div class="contact-item">
-          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-          @JLACRUZSERVICIOS
-        </div>
-        <div class="contact-item map-block">
-          <a href="https://maps.app.goo.gl/zj3vSWkrMvv7nmdz5" target="_blank" class="map-link">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1626.6182304514891!2d-69.31708!3d10.063276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e876700344d1a6f%3A0x14ae66f0c16b01bb!2sservicios%20generales%20j%20la%20cruz!5e1!3m2!1ses!2sve!4v1774829090310!5m2!1ses!2sve" width="100%" height="180" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-            Calle 26 entre Carreras 16 y 17. Edif. Torre Ejecutiva. Barquisimeto, Estado Lara
-          </a>
-        </div>
+  <!-- QUIÉNES SOMOS -->
+  <section class="quienes" id="quienes">
+    <div class="quienes-bg"></div>
+    <div class="quienes-overlay"></div>
+    <div class="quienes-content">
+      <div data-anim="zoom-in" style="margin-bottom:1.2rem">
+        <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="section-logo" />
       </div>
-      <div class="contact-form-wrapper" data-anim="fade-up" data-delay="4">
-        <form action="mailto:JLACRUZCA@GMAIL.COM" method="post" enctype="text/plain" class="contact-form">
-          <div class="form-group">
-            <label for="nombre">Nombre</label>
-            <input type="text" id="nombre" name="nombre" required>
+      <span class="section-eyebrow" data-anim="fade-down" data-delay="1">Sobre Nosotros</span>
+      <h2 data-anim="fade-up" data-delay="2">¿Quiénes<br>Somos?</h2>
+      <p data-anim="fade-up" data-delay="3">En <strong>J.LACRUZ C.A.</strong>, nos especializamos en la gestión integral
+        de infraestructuras. Entendemos que la imagen y el funcionamiento de su espacio son críticos para su éxito. Por
+        ello, ofrecemos un equipo multidisciplinario dedicado a garantizar ambientes limpios, seguros y plenamente
+        operativos.</p>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="servicios" id="servicios">
+    <div class="section-header">
+      <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Lo que hacemos</span>
+      <h2 data-anim="fade-up" data-delay="1">Nuestros Servicios</h2>
+      <p data-anim="fade-up" data-delay="2">Soluciones integrales diseñadas para mantener su infraestructura en óptimas
+        condiciones.</p>
+      <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
+    </div>
+
+    <div class="carousel-outer" id="carouselOuter">
+      <div class="carousel-track" id="carouselTrack">
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/limpieza.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>HIGIENE Y DESINFECCIÓN DE ALTO NIVEL</h3>
+            <p class="service-desc">Más que limpieza, ofrecemos ambientes saludables. Ejecutamos protocolos de aseo
+              profundo en áreas administrativas, pasillos, fachadas y cristales. Utilizamos insumos de alta calidad para
+              preservar superficies y el bienestar de su equipo.</p>
           </div>
-          <div class="form-group">
-            <label for="telefono">Teléfono</label>
-            <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10,11}" maxlength="11" title="Ingresa 10-11 dígitos sin espacios ni guiones">
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/jardineria.jpeg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>GESTIÓN DE ÁREAS VERDES Y PAISAJISMO</h3>
+            <p class="service-desc">Mantenemos la estética y salud de sus exteriores. Incluye desmalezamiento
+              preventivo, poda técnica y mantenimiento de jardines. Proyecte una entrada impecable para su
+              establecimiento.</p>
           </div>
-          <div class="form-group">
-            <label for="correo">Correo</label>
-            <input type="email" id="correo" name="correo" required>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/sistemas-hidraulicos.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>SISTEMAS HIDRÁULICOS</h3>
+            <p class="service-desc">Garantizamos el corazón de su edificación. Mantenimiento preventivo y correctivo de
+              bombas y tanques para un flujo de agua constante y eficiente. Evite paradas de emergencia con nuestro
+              monitoreo técnico especializado.</p>
           </div>
-          <div class="form-group">
-            <label for="mensaje">Mensaje</label>
-            <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/fumigador.png')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>CONTROL INTEGRAL DE PLAGAS Y BIOSEGURIDAD</h3>
+            <p class="service-desc">Protegemos su patrimonio y la salud de sus clientes. Implementamos programas de
+              fumigación contra insectos y roedores bajo normas de seguridad con productos certificados que no
+              interrumpen su operación diaria.</p>
           </div>
-          <button type="submit" class="btn-primary">Enviar Mensaje</button>
-        </form>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/tanques.jpeg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>SOLUCIONES EN PLOMERÍA Y SANITARIOS</h3>
+            <p class="service-desc">Atención inmediata en plomería y mantenimiento de baños. Resolvemos desde
+              filtraciones hasta instalaciones complejas, asegurando que sus sistemas sanitarios funcionen a la
+              perfección 24/7.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/aseo-limpieza.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>SUMINISTROS Y PRODUCTOS DE LIMPIEZA PROFESIONAL</h3>
+            <p class="service-desc">Máxima higiene con productos al mayor y detalle. Fórmulas de alta eficiencia para
+              grandes superficies, oficinas y hogares. Calidad profesional disponible para su empresa y comunidad.</p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/escombros.jpeg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>LOGÍSTICA DE DESECHOS Y CARGA DE ESCOMBROS</h3>
+            <p class="service-desc">Despeje eficiente de áreas en obra o mantenimiento. Nos encargamos de recolección,
+              carga y retiro de escombros de forma organizada y responsable, dejando sus espacios libres de residuos.
+            </p>
+          </div>
+        </div>
+
+        <div class="service-card">
+          <div class="service-card-bg" style="background-image:url('img/botellones.jpg')"></div>
+          <div class="service-card-overlay"></div>
+          <div class="service-card-content">
+            <h3>DISTRIBUCIÓN DE INSUMOS Y AGUA POTABLE</h3>
+            <p class="service-desc">Cadena de suministro garantizada. Proveemos productos de limpieza industrial y
+              distribuimos agua potable (botellones y cisternas) con entrega confiable a su puerta.</p>
+          </div>
+        </div>
+
+
+
       </div>
     </div>
-    <p class="contact-cta-text" data-anim="fade-up" data-delay="5">Solicite su inspección técnica o presupuesto</p>
-    <div data-anim="fade-up" data-delay="6"><a href="https://api.whatsapp.com/send?phone=584245085666" target="_blank" class="btn-outline">Contactar Ahora</a></div>
-  </div>
-</section>
 
-<!-- FOOTER -->
-<footer>
-  <div class="footer-logo">
-    <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="footer-logo-img" />
-    <div class="footer-brand">J. LACRUZ C.A.<span>Multiservicios</span></div>
-  </div>
-  <div class="footer-links">
-    <a href="#inicio">Inicio</a>
-    <a href="#quienes">Quiénes Somos</a>
-    <a href="#servicios">Servicios</a>
-    <a href="#clientes">Clientes</a>
-    <a href="#contacto">Contacto</a>
-  </div>
-  <p class="footer-copy">2024· J. LACRUZ C.A. · Todos los derechos reservados · 0424-5085666</p>
-</footer>
+    <div class="carousel-dots" id="carouselDots"></div>
 
-<!-- ═══════════════════════════════
+
+
+    <!-- CLIENTES -->
+    <section class="clientes" id="clientes">
+      <div class="clientes-watermark">
+        <svg viewBox="0 0 200 200" fill="none"><text x="10" y="120" font-family="Barlow Condensed" font-size="90"
+            font-weight="900" fill="#0a1628">JL</text></svg>
+      </div>
+      <div class="section-header" style="position:relative;z-index:1">
+        <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Nuestros Clientes</span>
+        <h2 data-anim="fade-up" data-delay="1">Clientes que Respaldan<br>Nuestra Experiencia</h2>
+        <p data-anim="fade-up" data-delay="2">Hemos servido a instituciones y empresas de gran envergadura garantizando
+          resultados óptimos bajo los más altos estándares de exigencia.</p>
+        <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
+      </div>
+      <div class="clientes-grid" style="position:relative;z-index:1">
+        <div class="cliente-logo" data-anim="flip-up" data-delay="1">
+          <div class="cliente-logo-inner">
+            <div class="logo-name" style="color:#003087;font-size:1.4rem;">cantv</div>
+            <div class="logo-sub">🇻🇪 Venezuela</div>
+          </div>
+        </div>
+        <div class="cliente-logo" data-anim="flip-up" data-delay="2"
+          style="background:linear-gradient(135deg,#c0392b,#922b21);border-color:#c0392b;border-radius:50%;width:100px;height:100px;flex-shrink:0;">
+          <div class="cliente-logo-inner">
+            <div class="logo-name" style="color:white;font-size:0.65rem;line-height:1.3">CERVECERÍA<br>REGIONAL</div>
+          </div>
+        </div>
+        <div class="cliente-logo" data-anim="flip-up" data-delay="3" style="width:200px">
+          <div class="cliente-logo-inner">
+            <div class="logo-name" style="color:#1a6b2a;font-size:0.65rem;line-height:1.4">Alcaldía
+              Bolivariana<br>Municipio Palavecino</div>
+          </div>
+        </div>
+        <div class="cliente-logo" data-anim="flip-up" data-delay="4">
+          <div class="cliente-logo-inner">
+            <div class="logo-name" style="color:#d4a017;font-size:1.3rem;">M</div>
+            <div class="logo-sub">Grupo Marpat</div>
+          </div>
+        </div>
+        <div class="cliente-logo" data-anim="flip-up" data-delay="5">
+          <div class="cliente-logo-inner">
+            <div class="logo-name" style="color:var(--blue);font-size:1rem;font-style:italic;">Mb</div>
+            <div class="logo-sub">Zoluciones C.A.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="contacto" id="contacto">
+      <div class="contacto-bg"></div>
+      <div class="contacto-overlay"></div>
+      <div class="contacto-content">
+        <div data-anim="zoom-in" style="margin-bottom:1.5rem">
+          <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="section-logo" />
+        </div>
+        <span class="section-eyebrow" data-anim="fade-left" data-delay="1">Contáctenos</span>
+        <h2 data-anim="fade-up" data-delay="2">Estamos Listos para<br>Ser Su Aliado<br>Estratégico.</h2>
+        <p class="contacto-tagline" data-anim="fade-up" data-delay="3">Solicite una inspección técnica o presupuesto a
+          la medida de sus necesidades.</p>
+        <div class="contact-grid">
+          <div class="contact-info" data-anim="fade-right" data-delay="3">
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
+              </svg>
+              0424-5085666
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+              </svg>
+              JLACRUZCA@GMAIL.COM
+            </div>
+            <div class="contact-item">
+              <svg viewBox="0 0 24 24">
+                <path
+                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
+              </svg>
+              @JLACRUZSERVICIOS
+            </div>
+            <div class="contact-item map-block">
+              <a href="https://maps.app.goo.gl/zj3vSWkrMvv7nmdz5" target="_blank" class="map-link">
+                <iframe
+                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1626.6182304514891!2d-69.31708!3d10.063276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e876700344d1a6f%3A0x14ae66f0c16b01bb!2sservicios%20generales%20j%20la%20cruz!5e1!3m2!1ses!2sve!4v1774829090310!5m2!1ses!2sve"
+                  width="100%" height="180" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy"
+                  referrerpolicy="no-referrer-when-downgrade"></iframe>
+                Calle 26 entre Carreras 16 y 17. Edif. Torre Ejecutiva. Barquisimeto, Estado Lara
+              </a>
+            </div>
+          </div>
+          <div class="contact-form-wrapper" data-anim="fade-up" data-delay="4">
+            <form action="mailto:JLACRUZCA@GMAIL.COM" method="post" enctype="text/plain" class="contact-form">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" name="nombre" required>
+              </div>
+              <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10,11}" maxlength="11"
+                  title="Ingresa 10-11 dígitos sin espacios ni guiones">
+              </div>
+              <div class="form-group">
+                <label for="correo">Correo</label>
+                <input type="email" id="correo" name="correo" required>
+              </div>
+              <div class="form-group">
+                <label for="mensaje">Mensaje</label>
+                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn-primary">Enviar Mensaje</button>
+            </form>
+          </div>
+        </div>
+        <p class="contact-cta-text" data-anim="fade-up" data-delay="5">Solicite su inspección técnica o presupuesto</p>
+        <div data-anim="fade-up" data-delay="6"><a href="https://api.whatsapp.com/send?phone=584245085666"
+            target="_blank" class="btn-outline">Contactar Ahora</a></div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-logo">
+        <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="footer-logo-img" />
+        <div class="footer-brand">J. LACRUZ C.A.<span>Multiservicios</span></div>
+      </div>
+      <div class="footer-links">
+        <a href="#inicio">Inicio</a>
+        <a href="#quienes">Quiénes Somos</a>
+        <a href="#servicios">Servicios</a>
+        <a href="#clientes">Clientes</a>
+        <a href="#contacto">Contacto</a>
+      </div>
+      <p class="footer-copy">2024· J. LACRUZ C.A. · Todos los derechos reservados · 0424-5085666</p>
+    </footer>
+
+    <!-- ═══════════════════════════════
      JAVASCRIPT
 ═══════════════════════════════ -->
-<script src="./js/main.js"></script>
-<script>
-  const contactoForm = document.querySelector('.contact-form');
-  if (contactoForm) {
-    contactoForm.addEventListener('submit', function (e) {
-      const telefono = document.getElementById('telefono');
-      const valor = telefono.value.trim();
-      const valido = /^[0-9]{10,11}$/.test(valor);
-      if (!valido) {
-        e.preventDefault();
-        telefono.focus();
-        alert('Por favor ingresa un teléfono válido de 10-11 dígitos sin espacios ni signos.');
+    <script src="./js/main.js"></script>
+    <script>
+      const contactoForm = document.querySelector('.contact-form');
+      if (contactoForm) {
+        contactoForm.addEventListener('submit', function (e) {
+          const telefono = document.getElementById('telefono');
+          const valor = telefono.value.trim();
+          const valido = /^[0-9]{10,11}$/.test(valor);
+          if (!valido) {
+            e.preventDefault();
+            telefono.focus();
+            alert('Por favor ingresa un teléfono válido de 10-11 dígitos sin espacios ni signos.');
+          }
+        });
       }
-    });
-  }
-</script>
+    </script>
 </body>
+
 </html>
-
-
