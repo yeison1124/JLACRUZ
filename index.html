@@ -4,41 +4,92 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>J. LACRUZ C.A. | Multiservicios</title>
-  <link rel="image/favicon.ico" type="image/favicon.ico" href="favicon.ico">
-  <link
-    href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="./styles/style.css" />
+  <title>J. LACRUZ C.A. | Multiservicios &amp; Suministros</title>
+
+  <!-- Favicon oficial del sistema -->
+  <link rel="shortcut icon" href="./img/logo-footer.png" type="image/x-icon">
+
+  <!-- Bootstrap 5 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+
+  <!-- SweetAlert2 CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
+  <!-- Fuentes corporativas Google -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800;900&family=Barlow+Condensed:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Estilos del sistema ERP -->
+  <link rel="stylesheet" href="/proyecto-lacruz-j/src/assets/css/header.css">
+  <link rel="stylesheet" href="/proyecto-lacruz-j/src/assets/css/pedidos.css">
+
+  <!-- Estilos propios de la página web -->
+  <link rel="stylesheet" href="./styles/style.css">
 </head>
 
 <body>
 
-  <!-- NAVBAR -->
+  <!-- NAVBAR ESPACIOSO Y LIMPIO -->
   <nav id="navbar">
     <a href="#inicio" class="nav-logo">
       <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="nav-logo-img" />
       <div class="nav-brand">J. LACRUZ C.A.<span>MULTISERVICIOS</span></div>
     </a>
+
     <ul class="nav-links">
       <li><a href="#inicio">Inicio</a></li>
       <li><a href="#quienes">Quiénes Somos</a></li>
       <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#catalogo">Catálogo &amp; Pedidos</a></li>
       <li><a href="#clientes">Clientes</a></li>
       <li><a href="#contacto">Contacto</a></li>
     </ul>
-    <div class="nav-phone">📞 0424-5085666</div>
-    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+
+    <div class="nav-actions">
+      <!-- Teléfono estilizado en navbar -->
+      <a href="tel:04245085666" class="nav-phone-btn d-none d-xl-flex" title="Llamar o WhatsApp">
+        <svg viewBox="0 0 24 24" width="15" height="15" fill="currentColor"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
+        <span>0424-5085666</span>
+      </a>
+
+      <!-- Botón del carrito en navbar (SVG inmutable) -->
+      <button class="nav-btn-carrito" id="btnAbrirCarritoNav" title="Ver carrito de pedidos" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span class="badge-carrito-nav d-none" id="badgeCarritoNav">0</span>
+      </button>
+
+      <!-- Botón Iniciar Sesión / Registrarse -->
+      <a href="https://jlacruzca.com/usuarios/login" target="_blank" class="nav-btn-sistema" title="Acceso al Sistema ERP">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg>
+        <span>INICIAR SESIÓN / REGISTRARSE</span>
+      </a>
+    </div>
+
+    <div class="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
   </nav>
 
+  <!-- MENÚ MÓVIL -->
   <div class="mobile-menu" id="mobileMenu">
     <ul>
       <li><a href="#inicio" onclick="toggleMenu()">Inicio</a></li>
       <li><a href="#quienes" onclick="toggleMenu()">Quiénes Somos</a></li>
       <li><a href="#servicios" onclick="toggleMenu()">Servicios</a></li>
-
+      <li><a href="#catalogo" onclick="toggleMenu()">Catálogo &amp; Pedidos</a></li>
       <li><a href="#clientes" onclick="toggleMenu()">Clientes</a></li>
       <li><a href="#contacto" onclick="toggleMenu()">Contacto</a></li>
+      <li>
+        <a href="https://jlacruzca.com/usuarios/login" target="_blank" class="mobile-login-link" onclick="toggleMenu()">
+          🔐 INICIAR SESIÓN / REGISTRARSE
+        </a>
+      </li>
       <li><a href="tel:04245085666">📞 0424-5085666</a></li>
     </ul>
   </div>
@@ -54,54 +105,50 @@
       <span class="hero-tag h-a h-a2">2024 · Venezuela</span>
       <h1 class="h-a h-a3">J. LACRUZ<br><em>C.A.</em></h1>
       <p class="hero-sub h-a h-a4">Multiservicios · Soluciones Integrales</p>
-      <p class="hero-desc h-a h-a5">Especialistas en gestión integral de infraestructuras. Garantizamos ambientes
-        limpios, seguros y plenamente operativos para su empresa y comunidad.</p>
+      <p class="hero-desc h-a h-a5">
+        Especialistas en gestión integral de infraestructuras, suministro de agua potable y productos de limpieza profesional. Garantizamos ambientes limpios, seguros y plenamente operativos.
+      </p>
       <div class="hero-icons h-a h-a6">
         <div class="hero-icon-item">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M22.7 19l-9.1-9.1c.9-2.3.4-5-1.5-6.9-2-2-5-2.4-7.4-1.3L9 6 6 9 1.6 4.7C.4 7.1.9 10.1 2.9 12.1c1.9 1.9 4.6 2.4 6.9 1.5l9.1 9.1c.4.4 1 .4 1.4 0l2.3-2.3c.5-.4.5-1.1.1-1.4z" /></svg>
           <span>Mantenimiento</span>
         </div>
         <div class="hero-icon-item">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1 0-1.72.1-2.34.2C14.07 13.42 15.58 11 17 8z" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 008 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1 0-1.72.1-2.34.2C14.07 13.42 15.58 11 17 8z" /></svg>
           <span>Jardinería</span>
         </div>
         <div class="hero-icon-item">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M19 9h-2V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm-7 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 9V7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9z" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M19 9h-2V7c0-2.8-2.2-5-5-5S7 4.2 7 7v2H5c-1.1 0-2 .9-2 2v9c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-9c0-1.1-.9-2-2-2zm-7 7c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zM9 9V7c0-1.7 1.3-3 3-3s3 1.3 3 3v2H9z" /></svg>
           <span>Limpieza</span>
         </div>
         <div class="hero-icon-item">
-          <svg viewBox="0 0 24 24">
-            <path d="M12 2a5 5 0 015 5c0 5.25-5 13-5 13S7 12.25 7 7a5 5 0 015-5zm0 7a2 2 0 100-4 2 2 0 000 4z" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 015 5c0 5.25-5 13-5 13S7 12.25 7 7a5 5 0 015-5zm0 7a2 2 0 100-4 2 2 0 000 4z" /></svg>
           <span>Plomería</span>
         </div>
         <div class="hero-icon-item">
-          <svg viewBox="0 0 24 24">
-            <path
-              d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" />
-          </svg>
+          <svg viewBox="0 0 24 24"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5a2.5 2.5 0 010-5 2.5 2.5 0 010 5z" /></svg>
           <span>Fumigación</span>
         </div>
       </div>
-      <div class="h-a h-a7"><a href="#contacto" class="btn-primary">Solicitar Presupuesto</a></div>
+      <div class="hero-cta-group h-a h-a7">
+        <a href="#catalogo" class="btn-primary">Ver Catálogo &amp; Pedidos</a>
+        <a href="#contacto" class="btn-outline">Contactar Asesor</a>
+      </div>
     </div>
     <div class="hero-ticker">
       <div class="ticker-track">
-        <span>Limpieza</span><span>Desmalezados</span><span>Pico y
-          Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos
-          de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
-        <span>Limpieza</span><span>Desmalezados</span><span>Pico y
-          Poda</span><span>Jardinería</span><span>Hidroneumático</span><span>Fumigación</span><span>Plomería</span><span>Productos
-          de Limpieza</span><span>Botellones de Agua</span><span>Cisternas</span><span>Bote de Escombros</span>
+        <span>Limpieza Profesional</span><span>Desmalezados</span>
+        <span>Pico y Poda</span><span>Jardinería</span>
+        <span>Sistemas Hidráulicos</span><span>Fumigación</span>
+        <span>Plomería</span><span>Productos de Limpieza</span>
+        <span>Botellones de Agua</span><span>Cisternas</span>
+        <span>Bote de Escombros</span>
+        <span>Limpieza Profesional</span><span>Desmalezados</span>
+        <span>Pico y Poda</span><span>Jardinería</span>
+        <span>Sistemas Hidráulicos</span><span>Fumigación</span>
+        <span>Plomería</span><span>Productos de Limpieza</span>
+        <span>Botellones de Agua</span><span>Cisternas</span>
+        <span>Bote de Escombros</span>
       </div>
     </div>
   </section>
@@ -116,277 +163,521 @@
       </div>
       <span class="section-eyebrow" data-anim="fade-down" data-delay="1">Sobre Nosotros</span>
       <h2 data-anim="fade-up" data-delay="2">¿Quiénes<br>Somos?</h2>
-      <p data-anim="fade-up" data-delay="3">En <strong>J.LACRUZ C.A.</strong>, nos especializamos en la gestión integral
-        de infraestructuras. Entendemos que la imagen y el funcionamiento de su espacio son críticos para su éxito. Por
-        ello, ofrecemos un equipo multidisciplinario dedicado a garantizar ambientes limpios, seguros y plenamente
-        operativos.</p>
+      <p data-anim="fade-up" data-delay="3">
+        En <strong>J.LACRUZ C.A.</strong>, nos especializamos en la gestión integral de infraestructuras corporativas, comerciales y residenciales. Entendemos que la imagen, higiene y el óptimo funcionamiento de sus espacios son esenciales para su éxito. Ponemos a su disposición un equipo técnico altamente calificado, una moderna flota logística de reparto y distribución de suministros de limpieza y agua potable.
+      </p>
     </div>
   </section>
 
   <!-- SERVICIOS -->
   <section class="servicios" id="servicios">
-    <div class="section-header">
+    <div class="section-header text-center mx-auto">
       <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Lo que hacemos</span>
       <h2 data-anim="fade-up" data-delay="1">Nuestros Servicios</h2>
-      <p data-anim="fade-up" data-delay="2">Soluciones integrales diseñadas para mantener su infraestructura en óptimas
-        condiciones.</p>
+      <p data-anim="fade-up" data-delay="2">
+        Soluciones técnicas y operativas diseñadas para mantener su infraestructura en óptimas condiciones.
+      </p>
       <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
     </div>
-
     <div class="carousel-outer" id="carouselOuter">
       <div class="carousel-track" id="carouselTrack">
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/limpieza.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>HIGIENE Y DESINFECCIÓN DE ALTO NIVEL</h3>
-            <p class="service-desc">Más que limpieza, ofrecemos ambientes saludables. Ejecutamos protocolos de aseo
-              profundo en áreas administrativas, pasillos, fachadas y cristales. Utilizamos insumos de alta calidad para
-              preservar superficies y el bienestar de su equipo.</p>
+            <p class="service-desc">Más que limpieza, ofrecemos ambientes saludables. Protocolos de aseo profundo en áreas administrativas, pasillos, fachadas y cristales.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/jardineria.jpeg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>GESTIÓN DE ÁREAS VERDES Y PAISAJISMO</h3>
-            <p class="service-desc">Mantenemos la estética y salud de sus exteriores. Incluye desmalezamiento
-              preventivo, poda técnica y mantenimiento de jardines. Proyecte una entrada impecable para su
-              establecimiento.</p>
+            <p class="service-desc">Desmalezamiento preventivo, poda técnica y mantenimiento continuo de jardines corporativos.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/sistemas-hidraulicos.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>SISTEMAS HIDRÁULICOS</h3>
-            <p class="service-desc">Garantizamos el corazón de su edificación. Mantenimiento preventivo y correctivo de
-              bombas y tanques para un flujo de agua constante y eficiente. Evite paradas de emergencia con nuestro
-              monitoreo técnico especializado.</p>
+            <p class="service-desc">Mantenimiento preventivo y correctivo de bombas, presostatos y tanques de reserva.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/fumigador.png')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>CONTROL INTEGRAL DE PLAGAS Y BIOSEGURIDAD</h3>
-            <p class="service-desc">Protegemos su patrimonio y la salud de sus clientes. Implementamos programas de
-              fumigación contra insectos y roedores bajo normas de seguridad con productos certificados que no
-              interrumpen su operación diaria.</p>
+            <p class="service-desc">Programas de fumigación certificados contra insectos y roedores.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/tanques.jpeg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>SOLUCIONES EN PLOMERÍA Y SANITARIOS</h3>
-            <p class="service-desc">Atención inmediata en plomería y mantenimiento de baños. Resolvemos desde
-              filtraciones hasta instalaciones complejas, asegurando que sus sistemas sanitarios funcionen a la
-              perfección 24/7.</p>
+            <p class="service-desc">Detección y reparación de fugas, mantenimiento de griferías y acondicionamiento sanitario.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/aseo-limpieza.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>SUMINISTROS Y PRODUCTOS DE LIMPIEZA PROFESIONAL</h3>
-            <p class="service-desc">Máxima higiene con productos al mayor y detalle. Fórmulas de alta eficiencia para
-              grandes superficies, oficinas y hogares. Calidad profesional disponible para su empresa y comunidad.</p>
+            <p class="service-desc">Desinfectantes, cloro, jabón líquido, desengrasantes y combos institucionales.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/escombros.jpeg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>LOGÍSTICA DE DESECHOS Y CARGA DE ESCOMBROS</h3>
-            <p class="service-desc">Despeje eficiente de áreas en obra o mantenimiento. Nos encargamos de recolección,
-              carga y retiro de escombros de forma organizada y responsable, dejando sus espacios libres de residuos.
-            </p>
+            <p class="service-desc">Recolección, acarreo y retiro responsable de residuos generados por obras o remodelaciones.</p>
           </div>
         </div>
-
         <div class="service-card">
           <div class="service-card-bg" style="background-image:url('img/botellones.jpg')"></div>
           <div class="service-card-overlay"></div>
           <div class="service-card-content">
             <h3>DISTRIBUCIÓN DE INSUMOS Y AGUA POTABLE</h3>
-            <p class="service-desc">Cadena de suministro garantizada. Proveemos productos de limpieza industrial y
-              distribuimos agua potable (botellones y cisternas) con entrega confiable a su puerta.</p>
+            <p class="service-desc">Botellones de agua purificada y camiones cisterna con entregas puerta a puerta.</p>
           </div>
         </div>
-
-
-
       </div>
     </div>
-
     <div class="carousel-dots" id="carouselDots"></div>
+  </section>
 
-
-
-    <!-- CLIENTES -->
-    <section class="clientes" id="clientes">
-      <div class="clientes-watermark">
-        <svg viewBox="0 0 200 200" fill="none"><text x="10" y="120" font-family="Barlow Condensed" font-size="90"
-            font-weight="900" fill="#0a1628">JL</text></svg>
-      </div>
-      <div class="section-header" style="position:relative;z-index:1">
-        <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Nuestros Clientes</span>
-        <h2 data-anim="fade-up" data-delay="1">Clientes que Respaldan<br>Nuestra Experiencia</h2>
-        <p data-anim="fade-up" data-delay="2">Hemos servido a instituciones y empresas de gran envergadura garantizando
-          resultados óptimos bajo los más altos estándares de exigencia.</p>
+  <!-- ═══════════════════════════════════════════════════════════
+       CATÁLOGO E-COMMERCE — PERPECTAMENTE CENTRADO
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="catalogo text-center" id="catalogo">
+    <div class="container text-center">
+      <div class="section-header text-center mx-auto mb-4">
+        <span class="section-eyebrow text-center" style="color:var(--blue)" data-anim="fade-right">E-Commerce &amp; Pedidos en Línea</span>
+        <h2 class="text-center" data-anim="fade-up" data-delay="1">Catálogo de Productos &amp; Suministros</h2>
+        <p class="text-center mx-auto" data-anim="fade-up" data-delay="2">
+          Explora nuestros suministros disponibles. Agrega al carrito y procesa tu pedido con delivery a tu puerta.
+        </p>
         <div class="section-line" data-anim="zoom-in" data-delay="3"></div>
       </div>
-      <div class="clientes-grid" style="position:relative;z-index:1">
-        <div class="cliente-logo" data-anim="flip-up" data-delay="1">
-          <div class="cliente-logo-inner">
-            <div class="logo-name" style="color:#003087;font-size:1.4rem;">cantv</div>
-            <div class="logo-sub">🇻🇪 Venezuela</div>
+
+      <!-- Barra de búsqueda + botón de carrito centrados -->
+      <div class="row justify-content-center align-items-center g-3 mb-4" data-anim="fade-up" data-delay="1">
+        <div class="col-md-7 col-lg-8">
+          <div class="position-relative">
+            <span class="position-absolute top-50 start-0 translate-middle-y ms-3 text-muted">🔍</span>
+            <input type="text" id="buscadorCatalogoPagina" class="form-control rounded-pill ps-5 py-2 shadow-sm" placeholder="Buscar producto, presentación o categoría...">
           </div>
         </div>
-        <div class="cliente-logo" data-anim="flip-up" data-delay="2"
-          style="background:linear-gradient(135deg,#c0392b,#922b21);border-color:#c0392b;border-radius:50%;width:100px;height:100px;flex-shrink:0;">
-          <div class="cliente-logo-inner">
-            <div class="logo-name" style="color:white;font-size:0.65rem;line-height:1.3">CERVECERÍA<br>REGIONAL</div>
-          </div>
+        <div class="col-md-4 col-lg-3">
+          <button class="btn btn-dark w-100 rounded-pill py-2 fw-bold d-flex align-items-center justify-content-center gap-2 shadow-sm" data-bs-toggle="offcanvas" data-bs-target="#cartOffcanvas">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="9" cy="21" r="1"></circle>
+              <circle cx="20" cy="21" r="1"></circle>
+              <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+            </svg>
+            <span>Ver Carrito</span>
+            <span class="badge bg-warning text-dark ms-1 nroItemsPedido d-none">0</span>
+          </button>
         </div>
-        <div class="cliente-logo" data-anim="flip-up" data-delay="3" style="width:200px">
-          <div class="cliente-logo-inner">
-            <div class="logo-name" style="color:#1a6b2a;font-size:0.65rem;line-height:1.4">Alcaldía
-              Bolivariana<br>Municipio Palavecino</div>
+      </div>
+
+      <!-- Categorías centradas -->
+      <div class="d-flex flex-wrap justify-content-center align-items-center gap-2 mb-4" id="filtrosCategorias" data-anim="fade-up" data-delay="2">
+        <button class="filtro-btn botonCategoriaItems active" data-cat="todos">Todos</button>
+      </div>
+
+      <!-- Contenedor del Catálogo (Cards Grid Centrado) -->
+      <div class="container text-center" data-anim="fade-up" data-delay="3">
+        <div id="catalogoLoadingState" class="text-center py-5">
+          <div class="spinner-border text-primary" style="width: 3rem; height: 3rem;" role="status">
+            <span class="visually-hidden">Cargando productos...</span>
           </div>
+          <p class="text-muted mt-3 fw-bold">Cargando catálogo del sistema...</p>
         </div>
-        <div class="cliente-logo" data-anim="flip-up" data-delay="4">
-          <div class="cliente-logo-inner">
-            <div class="logo-name" style="color:#d4a017;font-size:1.3rem;">M</div>
-            <div class="logo-sub">Grupo Marpat</div>
-          </div>
+
+        <!-- GRID DE TARJETAS DE PRODUCTOS CENTRADAS -->
+        <div class="row g-4 justify-content-center d-none" id="catalogoGridWrapper">
+          <!-- Renderizado dinámico de tarjetas por JS -->
         </div>
-        <div class="cliente-logo" data-anim="flip-up" data-delay="5">
-          <div class="cliente-logo-inner">
-            <div class="logo-name" style="color:var(--blue);font-size:1rem;font-style:italic;">Mb</div>
-            <div class="logo-sub">Zoluciones C.A.</div>
+
+        <div id="catalogoVacioState" class="text-center py-5 d-none bg-white rounded shadow-sm p-4 mx-auto" style="max-width:500px">
+          <div class="fs-1 text-muted opacity-50 mb-2">📦</div>
+          <h5 class="fw-bold text-dark mt-2">No hay productos disponibles</h5>
+          <p class="text-muted small mb-0">No se encontraron productos coincidentes en el catálogo.</p>
+        </div>
+      </div>
+
+      <!-- Banner al portal -->
+      <div class="mt-5" data-anim="zoom-in" data-delay="3">
+        <div class="ecommerce-banner text-center mx-auto" style="max-width:900px">
+          <div class="ecommerce-banner-content">
+            <div class="ecommerce-badge">Sistema ERP &amp; Delivery Conectado</div>
+            <h3>¿Desea realizar compras institucionales o al mayor?</h3>
+            <p>
+              Inicie sesión en nuestro <strong>Portal de Clientes</strong> para gestionar presupuestos en tiempo real, solicitar despachos con ruta de entrega y seleccionar su método de pago.
+            </p>
+            <div class="ecommerce-banner-btns justify-content-center">
+              <a href="https://jlacruzca.com/usuarios/login" target="_blank" class="btn-primary">INICIAR SESIÓN / REGISTRARSE</a>
+              <a href="#contacto" class="btn-outline">Solicitar Asesoría</a>
+            </div>
           </div>
         </div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- CONTACTO -->
-    <section class="contacto" id="contacto">
-      <div class="contacto-bg"></div>
-      <div class="contacto-overlay"></div>
-      <div class="contacto-content">
-        <div data-anim="zoom-in" style="margin-bottom:1.5rem">
-          <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="section-logo" />
+  <!-- CLIENTES -->
+  <section class="clientes" id="clientes">
+    <div class="section-header text-center mx-auto">
+      <span class="section-eyebrow" style="color:var(--blue)" data-anim="fade-right">Empresas que confían en nosotros</span>
+      <h2 data-anim="fade-up" data-delay="1">Clientes que Respaldan<br>Nuestra Experiencia</h2>
+      <div class="section-line" data-anim="zoom-in" data-delay="2"></div>
+    </div>
+    <div class="clientes-grid" data-anim="fade-up" data-delay="3">
+      <div class="cliente-card">
+        <div class="cliente-logo-wrap">
+          <img src="./img/clientes/cantv.svg" alt="CANTV">
         </div>
-        <span class="section-eyebrow" data-anim="fade-left" data-delay="1">Contáctenos</span>
-        <h2 data-anim="fade-up" data-delay="2">Estamos Listos para<br>Ser Su Aliado<br>Estratégico.</h2>
-        <p class="contacto-tagline" data-anim="fade-up" data-delay="3">Solicite una inspección técnica o presupuesto a
-          la medida de sus necesidades.</p>
-        <div class="contact-grid">
-          <div class="contact-info" data-anim="fade-right" data-delay="3">
-            <div class="contact-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z" />
-              </svg>
-              0424-5085666
+        <span class="cliente-name">CANTV</span>
+      </div>
+      <div class="cliente-card">
+        <div class="cliente-logo-wrap">
+          <img src="./img/clientes/regional.svg" alt="Cervecería Regional">
+        </div>
+        <span class="cliente-name">Cervecería Regional</span>
+      </div>
+      <div class="cliente-card">
+        <div class="cliente-logo-wrap">
+          <img src="./img/clientes/palavecino.svg" alt="Alcaldía de Palavecino">
+        </div>
+        <span class="cliente-name">Alcaldía de Palavecino</span>
+      </div>
+      <div class="cliente-card">
+        <div class="cliente-logo-wrap">
+          <img src="./img/clientes/marpat.svg" alt="Grupo Marpat">
+        </div>
+        <span class="cliente-name">Grupo Marpat</span>
+      </div>
+      <div class="cliente-card">
+        <div class="cliente-logo-wrap">
+          <img src="./img/clientes/mb_zoluciones.svg" alt="MB Zoluciones">
+        </div>
+        <span class="cliente-name">MB Zoluciones C.A.</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACTO -->
+  <section class="contacto" id="contacto">
+    <div class="container">
+      <div class="section-header text-center mx-auto mb-5">
+        <span class="section-eyebrow text-white opacity-75" data-anim="fade-right">Contacto Directo</span>
+        <h2 class="text-white fw-bold" data-anim="fade-up" data-delay="1">Estamos Listos para Ser Su Aliado Estratégico</h2>
+        <p class="text-white opacity-75 max-w-600 mx-auto" data-anim="fade-up" data-delay="2">
+          Comuníquese directamente con nuestro equipo técnico y operativo para solicitar información o presupuestos.
+        </p>
+        <div class="section-line bg-white" data-anim="zoom-in" data-delay="3"></div>
+      </div>
+
+      <div class="row g-4 align-items-stretch" data-anim="fade-up" data-delay="2">
+        <div class="col-lg-5">
+          <div class="contacto-card-info h-100 p-4 p-md-5 d-flex flex-column justify-content-between">
+            <div>
+              <h4 class="fw-bold text-white mb-4">Información de Atención</h4>
+              
+              <div class="contacto-item-box mb-3">
+                <div class="contacto-icon-circle">📞</div>
+                <div>
+                  <small class="text-white opacity-75 d-block">Teléfono / WhatsApp</small>
+                  <strong class="text-white fs-6">0424-5085666</strong>
+                </div>
+              </div>
+
+              <div class="contacto-item-box mb-3">
+                <div class="contacto-icon-circle">✉️</div>
+                <div>
+                  <small class="text-white opacity-75 d-block">Correo Electrónico</small>
+                  <strong class="text-white fs-6">jlacruzca@gmail.com</strong>
+                </div>
+              </div>
+
+              <div class="contacto-item-box mb-3">
+                <div class="contacto-icon-circle">📍</div>
+                <div>
+                  <small class="text-white opacity-75 d-block">Ubicación Principal</small>
+                  <strong class="text-white fs-6">Barquisimeto, Estado Lara, Venezuela</strong>
+                </div>
+              </div>
+
+              <div class="contacto-item-box mb-3">
+                <div class="contacto-icon-circle">🏢</div>
+                <div>
+                  <small class="text-white opacity-75 d-block">Registro Fiscal</small>
+                  <strong class="text-white fs-6">RIF J-504221190</strong>
+                </div>
+              </div>
             </div>
-            <div class="contact-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
-              </svg>
-              JLACRUZCA@GMAIL.COM
-            </div>
-            <div class="contact-item">
-              <svg viewBox="0 0 24 24">
-                <path
-                  d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-              </svg>
-              @JLACRUZSERVICIOS
-            </div>
-            <div class="contact-item map-block">
-              <a href="https://maps.app.goo.gl/zj3vSWkrMvv7nmdz5" target="_blank" class="map-link">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d1626.6182304514891!2d-69.31708!3d10.063276!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e876700344d1a6f%3A0x14ae66f0c16b01bb!2sservicios%20generales%20j%20la%20cruz!5e1!3m2!1ses!2sve!4v1774829090310!5m2!1ses!2sve"
-                  width="100%" height="180" style="border:0; border-radius: 4px;" allowfullscreen="" loading="lazy"
-                  referrerpolicy="no-referrer-when-downgrade"></iframe>
-                Calle 26 entre Carreras 16 y 17. Edif. Torre Ejecutiva. Barquisimeto, Estado Lara
+
+            <div class="mt-4 pt-3 border-top border-white-15">
+              <a href="https://api.whatsapp.com/send?phone=584245085666" target="_blank" class="btn btn-light w-100 rounded-pill py-3 fw-bold text-primary shadow d-flex align-items-center justify-content-center gap-2">
+                <span>Contactar por WhatsApp Directo</span>
+                <span>➔</span>
               </a>
             </div>
           </div>
-          <div class="contact-form-wrapper" data-anim="fade-up" data-delay="4">
-            <form action="mailto:JLACRUZCA@GMAIL.COM" method="post" enctype="text/plain" class="contact-form">
-              <div class="form-group">
-                <label for="nombre">Nombre</label>
-                <input type="text" id="nombre" name="nombre" required>
+        </div>
+
+        <div class="col-lg-7">
+          <div class="contacto-card-form h-100 p-4 p-md-5">
+            <h4 class="fw-bold text-white mb-2">Envíenos un Mensaje</h4>
+            <p class="text-white opacity-75 small mb-4">Complete los datos a continuación y nos comunicaremos a la brevedad.</p>
+
+            <form id="formContactoPagina" novalidate>
+              <div class="mb-3">
+                <label class="form-label text-white small fw-bold">Nombre Completo</label>
+                <input type="text" class="form-control form-control-lg bg-white-10 text-white border-white-20 rounded-3" id="contactoNombre" placeholder="Ej: Juan Pérez" required>
               </div>
-              <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="tel" id="telefono" name="telefono" required pattern="[0-9]{10,11}" maxlength="11"
-                  title="Ingresa 10-11 dígitos sin espacios ni guiones">
+
+              <div class="mb-3">
+                <label class="form-label text-white small fw-bold">Teléfono / WhatsApp</label>
+                <input type="tel" class="form-control form-control-lg bg-white-10 text-white border-white-20 rounded-3" id="contactoTelefono" placeholder="Ej: 0424-1234567" required>
               </div>
-              <div class="form-group">
-                <label for="correo">Correo</label>
-                <input type="email" id="correo" name="correo" required>
+
+              <div class="mb-4">
+                <label class="form-label text-white small fw-bold">Mensaje o Requerimiento</label>
+                <textarea class="form-control form-control-lg bg-white-10 text-white border-white-20 rounded-3" id="contactoMensaje" rows="4" placeholder="Cuéntenos qué servicios o productos requiere..." required></textarea>
               </div>
-              <div class="form-group">
-                <label for="mensaje">Mensaje</label>
-                <textarea id="mensaje" name="mensaje" rows="4" required></textarea>
-              </div>
-              <button type="submit" class="btn-primary">Enviar Mensaje</button>
+
+              <button type="button" onclick="enviarContactoWA()" class="btn btn-primary btn-lg w-100 rounded-pill py-3 fw-bold shadow">
+                Enviar por WhatsApp
+              </button>
             </form>
           </div>
         </div>
-        <p class="contact-cta-text" data-anim="fade-up" data-delay="5">Solicite su inspección técnica o presupuesto</p>
-        <div data-anim="fade-up" data-delay="6"><a href="https://api.whatsapp.com/send?phone=584245085666"
-            target="_blank" class="btn-outline">Contactar Ahora</a></div>
       </div>
-    </section>
+    </div>
+  </section>
 
-    <!-- FOOTER -->
-    <footer>
-      <div class="footer-logo">
-        <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="footer-logo-img" />
-        <div class="footer-brand">J. LACRUZ C.A.<span>Multiservicios</span></div>
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-logo">
+      <img src="./img/logo-footer.png" alt="J. LACRUZ C.A. Multiservicios logo" class="footer-logo-img" />
+      <div class="footer-brand">
+        J. LACRUZ C.A.<span>Multiservicios &amp; Suministros</span>
       </div>
-      <div class="footer-links">
-        <a href="#inicio">Inicio</a>
-        <a href="#quienes">Quiénes Somos</a>
-        <a href="#servicios">Servicios</a>
-        <a href="#clientes">Clientes</a>
-        <a href="#contacto">Contacto</a>
-      </div>
-      <p class="footer-copy">2024· J. LACRUZ C.A. · Todos los derechos reservados · 0424-5085666</p>
-    </footer>
+    </div>
+    <div class="footer-links">
+      <a href="#inicio">Inicio</a>
+      <a href="#quienes">Quiénes Somos</a>
+      <a href="#servicios">Servicios</a>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#clientes">Clientes</a>
+      <a href="https://jlacruzca.com/usuarios/login" target="_blank">INICIAR SESIÓN / REGISTRARSE</a>
+      <a href="#contacto">Contacto</a>
+    </div>
+    <p class="footer-copy">
+      © 2024-2026 J. LACRUZ C.A. · RIF J-504221190 · Barquisimeto, Venezuela · 0424-5085666
+    </p>
 
-    <!-- ═══════════════════════════════
-     JAVASCRIPT
-═══════════════════════════════ -->
-    <script src="./js/main.js"></script>
-    <script>
-      const contactoForm = document.querySelector('.contact-form');
-      if (contactoForm) {
-        contactoForm.addEventListener('submit', function (e) {
-          const telefono = document.getElementById('telefono');
-          const valor = telefono.value.trim();
-          const valido = /^[0-9]{10,11}$/.test(valor);
-          if (!valido) {
-            e.preventDefault();
-            telefono.focus();
-            alert('Por favor ingresa un teléfono válido de 10-11 dígitos sin espacios ni signos.');
-          }
-        });
-      }
-    </script>
+    <!-- Configuración de Llave Secreta y URL Directa del Microservicio AI (Inyección Vercel/Hosting) -->
+    <input type="hidden" id="chatbot_secret_key" value="">
+    <input type="hidden" id="chatbot_microservice_url" value="">
+  </footer>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       COMPONENTE INTELIGENTE — BOTÓN FLOTANTE Y VISTA (SIN SECCIÓN EN PÁGINA)
+  ═══════════════════════════════════════════════════════════ -->
+
+  <!-- Botón flotante azul con el ícono exacto de Headphones (Auriculares) -->
+  <button id="chatbot-toggle-btn" class="btn btn-primary rounded-circle shadow-lg d-flex align-items-center justify-content-center p-0" style="position:fixed;bottom:20px;right:20px;width:60px;height:60px;z-index:1050;background-color:#0d6efd;border:2px solid #ffffff;" title="Asistente MicroBot AI">
+    <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+      <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"></path>
+      <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+    </svg>
+  </button>
+
+  <!-- Ventana desplegable del componente inteligente -->
+  <div id="chatbot-window" class="d-none shadow-lg border bg-white" style="position:fixed;bottom:85px;right:20px;width:360px;max-width:calc(100vw - 40px);height:450px;max-height:calc(100vh - 160px);z-index:1050;display:flex;flex-direction:column;overflow:hidden;border-radius:12px;">
+
+    <!-- Header con el logo oficial y los audífonos -->
+    <div class="p-3 border-bottom d-flex justify-content-between align-items-center bg-white flex-shrink-0">
+      <div class="d-flex align-items-center">
+        <div class="bg-primary rounded-circle d-flex justify-content-center align-items-center me-3 p-1" style="width:40px;height:40px;background-color:#0d6efd !important;">
+          <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="white" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M3 18v-6a9 9 0 0 1 18 0v6"></path>
+            <path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"></path>
+            <path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"></path>
+          </svg>
+        </div>
+        <div>
+          <h6 class="m-0 fw-bold text-dark" style="font-size:15px">MicroBot AI</h6>
+          <small class="text-success d-flex align-items-center" style="font-size:12px">
+            <span style="display:inline-block;width:6px;height:6px;border-radius:50%;background:#198754;margin-right:4px"></span>
+            En línea
+          </small>
+        </div>
+      </div>
+      <button id="chatbot-close-btn" class="btn-close" aria-label="Cerrar" style="font-size:14px"></button>
+    </div>
+
+    <!-- Mensajes del chat -->
+    <div id="chatbot-messages" class="flex-grow-1 p-3 overflow-auto" style="background-color:#f8f9fa">
+      <div class="text-center mb-3">
+        <small class="text-muted" style="font-size:11px">HOY</small>
+      </div>
+      <div class="d-flex mb-3">
+        <div class="bot-msg-bubble bg-white border p-3 shadow-sm">
+          ¡Hola! Soy tu asistente de MicroBot. Puedo ayudarte a recomendar productos o realizar presupuestos. ¿En qué puedo apoyarte hoy?
+          <div class="text-end text-muted mt-1" style="font-size:0.65rem" id="chatbotHoraInicio"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sugerencias -->
+    <div id="chatbot-suggestions" class="px-3 py-2 bg-white d-flex overflow-auto flex-shrink-0" style="white-space:nowrap;border-top:1px solid #dee2e6">
+      <button class="btn btn-sm btn-outline-secondary rounded-pill me-2 px-3" onclick="enviarSugerenciaChatbot('Soporte técnico')">Soporte técnico</button>
+      <button class="btn btn-sm btn-outline-secondary rounded-pill me-2 px-3" onclick="enviarSugerenciaChatbot('Quiero un presupuesto')">Presupuesto</button>
+      <button class="btn btn-sm btn-outline-secondary rounded-pill px-3" onclick="enviarSugerenciaChatbot('Cotizar botellones de agua')">Agua Potable</button>
+    </div>
+
+    <!-- Formulario Input -->
+    <div class="px-3 pt-2 pb-1 bg-white flex-shrink-0">
+      <form id="chatbot-form" class="d-flex position-relative">
+        <input type="text" id="chatbot-input" class="form-control rounded-pill ps-3 pe-5 py-2" placeholder="Escribe tu mensaje..." required autocomplete="off" style="border:1px solid #dee2e6;font-size:14px">
+        <button type="submit" class="btn btn-primary rounded-circle d-flex align-items-center justify-content-center position-absolute" style="width:36px;height:36px;right:4px;top:4px;background-color:#0d6efd;border:none">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+        </button>
+      </form>
+      <div class="text-center mt-2 mb-1">
+        <small class="text-muted" style="font-size:10px">Desarrollado por MicroBot AI Engine</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════════
+       OFFCANVAS CARRITO — PANEL LATERAL DEL SISTEMA
+  ═══════════════════════════════════════════════════════════ -->
+  <div class="panelCotizacionPedido offcanvas offcanvas-end" tabindex="-1" id="cartOffcanvas" aria-labelledby="cartOffcanvasLabel">
+    <div class="offcanvas-header bg-light border-bottom">
+      <h5 class="offcanvas-title fw-bold text-dark d-flex align-items-center" id="cartOffcanvasLabel">
+        <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="#ffc107" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="me-2">
+          <circle cx="9" cy="21" r="1"></circle>
+          <circle cx="20" cy="21" r="1"></circle>
+          <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+        </svg>
+        <span>Pedido Actual</span>
+      </h5>
+      <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+    </div>
+    <div class="offcanvas-body d-flex flex-column p-0">
+      <div class="bg-white p-3 border-bottom d-flex justify-content-between align-items-center shadow-sm">
+        <span class="text-muted small fw-bold">MOSTRAR TOTAL EN:</span>
+        <div data-nro_btn="1" class="botonera btn-group btn-group-sm rounded-pill shadow-sm" role="group">
+          <button type="button" class="btnTipoPago btn btn-dark text-white active fw-bold px-3" data-tipo_pago="bs">Bs</button>
+          <button type="button" class="btnTipoPago btn btn-outline-secondary text-dark px-3 border-0 bg-light" data-tipo_pago="usd">USD</button>
+        </div>
+      </div>
+      <div class="divItemsPedido cart-items flex-grow-1 overflow-auto p-3">
+        <div class="carritoVacio d-flex flex-column align-items-center justify-content-center text-center py-5 px-3" style="min-height:200px">
+          <div class="mb-3" style="font-size:3.5rem;opacity:0.18;color:#4e54c8">🛒</div>
+          <h6 class="fw-bold text-dark mb-1">Tu pedido está vacío</h6>
+          <p class="text-muted small mb-0">Agrega productos del catálogo para comenzar tu pedido.</p>
+        </div>
+        <!-- Molde de ítem (se clona en JS) -->
+        <div class="moldeItemPedido d-none card border-0 shadow-sm mb-3 position-relative">
+          <button class="btnEliItemPedido btn btn-sm btn-outline-danger position-absolute top-0 end-0 m-2 rounded-circle" title="Eliminar del pedido">
+            🗑️
+          </button>
+          <div class="card-body p-3">
+            <div class="d-flex mb-3 align-items-center">
+              <img src="./img/aseo-limpieza.jpg" class="rounded border imagenItemPedido" style="width:60px;height:60px;object-fit:cover;flex-shrink:0" onerror="this.src='./img/logo-footer.png'">
+              <div class="ms-3 pe-4 flex-grow-1">
+                <h6 class="mb-1 fw-bold text-dark text-truncate nombreItem" style="max-width:150px">Producto</h6>
+                <div class="d-flex flex-column lh-sm">
+                  <small class="text-muted">
+                    <span class="fw-bold">Base: </span>
+                    <span class="precioBaseItem">0.00</span>
+                    <span class="signoPrecio">Bs</span>
+                  </small>
+                  <small class="text-success">
+                    <span class="fw-bold">Mayor (-10%): </span>
+                    <span class="precioMayorItem">0.00</span>
+                    <span class="signoPrecio">Bs</span>
+                  </small>
+                </div>
+              </div>
+            </div>
+            <div class="d-flex justify-content-between align-items-center bg-light rounded p-2">
+              <div class="d-flex align-items-center bg-white rounded border border-light shadow-sm px-1">
+                <button class="btn btn-sm text-muted p-1 px-2 btnResItemPedido"> - </button>
+                <span class="fw-bold mx-2 cantidadItemCarrito">1</span>
+                <button class="btn btn-sm text-muted p-1 px-2 btnSumItemPedido"> + </button>
+              </div>
+              <div class="text-end divSubTotalItemPedido">
+                <small class="text-muted d-block lh-1">Subtotal</small>
+                <span class="fw-bold text-dark fs-6 lh-1 d-flex">
+                  <div class="subTotalBase precioDescuento me-3">
+                    <span class="cantidadSubTotalBase">0.00</span>
+                    <span class="signoPrecio">Bs</span>
+                  </div>
+                  <div class="subTotalDescuento">
+                    <span class="cantidadSubTotalDescuento">0.00</span>
+                    <span class="signoPrecio">Bs</span>
+                  </div>
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="depositoDetallesPedido"></div>
+      </div>
+      <div class="contenedorTotalPagar bg-white p-4 border-top shadow-lg">
+        <div class="descuentoPedidoPorMayor d-none d-flex justify-content-between mb-2">
+          <span class="text-muted">Descuento por Mayor:</span>
+          <div class="d-flex">
+            <span class="cantidadDescuentoPedidoPorMayor pe-1 text-success fw-bold">0.00</span>
+            <span class="signoPrecio text-success fw-bold">Bs</span>
+          </div>
+        </div>
+        <div class="totalesPedido d-flex justify-content-between align-items-center mb-4">
+          <span class="fs-5 fw-bold text-dark">TOTAL:</span>
+          <div class="text-end">
+            <span class="d-flex lh-1">
+              <div class="totalBase precioDescuento fs-5 me-3">
+                <span class="cantidadTotalBase">0.00</span>
+                <span class="signoPrecio">Bs</span>
+              </div>
+              <div class="totalDescuento fw-bold text-dark fs-4">
+                <span class="cantidadTotalDescuento">0.00</span>
+                <span class="signoPrecio">Bs</span>
+              </div>
+            </span>
+          </div>
+        </div>
+        <!-- Al no estar logueado, redirige al portal para procesar -->
+        <a href="https://jlacruzca.com/usuarios/login" target="_blank" class="btn btn-dark w-100 rounded-pill py-3 fw-bold shadow d-flex justify-content-center align-items-center gap-2">
+          <span>INICIAR SESIÓN / REGISTRARSE</span>
+          <span>➔</span>
+        </a>
+        <small class="text-muted d-block text-center mt-2" style="font-size:0.75rem">
+          Tu carrito se conservará cuando inicies sesión
+        </small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ SCRIPTS ═══════════════ -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Lógica principal de la página -->
+  <script src="./js/main.js"></script>
+
 </body>
-
 </html>
