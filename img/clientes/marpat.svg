@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="marpatGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E67E22"/>
+      <stop offset="50%" stop-color="#D35400"/>
+      <stop offset="100%" stop-color="#A04000"/>
+    </linearGradient>
+    <linearGradient id="blueMarpat" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2980B9"/>
+      <stop offset="100%" stop-color="#1B4F72"/>
+    </linearGradient>
+    <filter id="marpatShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  
+  <!-- Isotipo M dinámico / Flechas Publicitarias -->
+  <g transform="translate(15, 18)" filter="url(#marpatShadow)">
+    <!-- Letra M estilizada compuesta de polígonos modernos -->
+    <path d="M 15 90 V 25 L 45 65 L 75 25 V 90 H 60 V 50 L 45 72 L 30 50 V 90 H 15 Z" fill="url(#marpatGrad)"/>
+    <path d="M 75 25 L 90 45 L 85 90 H 75 Z" fill="url(#blueMarpat)" opacity="0.85"/>
+    <circle cx="45" cy="18" r="6" fill="url(#marpatGrad)"/>
+  </g>
+  
+  <!-- Tipografía Oficial MARPAT -->
+  <g transform="translate(130, 26)">
+    <text x="0" y="24" font-family="'Montserrat', sans-serif" font-size="14" font-weight="700" letter-spacing="4" fill="#5D6D7E">GRUPO</text>
+    <text x="0" y="60" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-size="40" font-weight="900" letter-spacing="3" fill="#A04000">MARPAT</text>
+    <rect x="0" y="70" width="240" height="3.5" fill="url(#marpatGrad)" rx="1.5"/>
+    <text x="0" y="88" font-family="'Montserrat', sans-serif" font-size="8.5" font-weight="700" letter-spacing="2.5" fill="#1B4F72">PUBLICIDAD &amp; ARTÍCULOS PROMOCIONALES</text>
+  </g>
+</svg>

@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="regGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#C0392B"/>
+      <stop offset="50%" stop-color="#96281B"/>
+      <stop offset="100%" stop-color="#641E16"/>
+    </linearGradient>
+    <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F9E79F"/>
+      <stop offset="50%" stop-color="#D4AC0D"/>
+      <stop offset="100%" stop-color="#9A7D0A"/>
+    </linearGradient>
+    <filter id="drop" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.25"/>
+    </filter>
+  </defs>
+  
+  <!-- Emblema Corona y R -->
+  <g transform="translate(10, 10)" filter="url(#drop)">
+    <!-- Escudo Ovalado Rojo -->
+    <ellipse cx="60" cy="60" rx="55" ry="55" fill="url(#regGrad)" stroke="url(#goldGrad)" stroke-width="4"/>
+    <ellipse cx="60" cy="60" rx="48" ry="48" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-dasharray="3 2" opacity="0.6"/>
+    
+    <!-- Corona Dorada -->
+    <path d="M 40 42 L 45 49 L 60 36 L 75 49 L 80 42 L 78 54 L 42 54 Z" fill="url(#goldGrad)"/>
+    <circle cx="40" cy="40" r="2.5" fill="#FFF"/>
+    <circle cx="60" cy="34" r="3" fill="#FFF"/>
+    <circle cx="80" cy="40" r="2.5" fill="#FFF"/>
+    
+    <!-- Letra R Estilizada Oficial -->
+    <path d="M 46 88 V 56 H 64 C 72 56 77 60 77 66 C 77 71 73 75 66 76 L 78 88 H 68 L 57 77 H 53 V 88 H 46 Z M 53 71 H 63 C 67 71 70 69 70 66 C 70 63 67 61 63 61 H 53 V 71 Z" fill="#FFFFFF"/>
+  </g>
+  
+  <!-- Tipografía Oficial CERVECERÍA REGIONAL -->
+  <g transform="translate(140, 25)">
+    <text x="0" y="32" font-family="'Montserrat', 'Arial Black', sans-serif" font-size="20" font-weight="900" letter-spacing="6" fill="#96281B">CERVECERÍA</text>
+    <text x="0" y="70" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-size="44" font-weight="900" letter-spacing="3" fill="#1C2833">REGIONAL</text>
+    <!-- Detalle dorado inferior -->
+    <rect x="0" y="80" width="240" height="4" fill="url(#goldGrad)" rx="2"/>
+    <text x="0" y="96" font-family="'Montserrat', sans-serif" font-size="9" font-weight="700" letter-spacing="4" fill="#7F8C8D">DESDE 1929 · VENEZUELA</text>
+  </g>
+</svg>

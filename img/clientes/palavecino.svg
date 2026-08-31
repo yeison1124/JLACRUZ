@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="greenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#27AE60"/>
+      <stop offset="100%" stop-color="#145A32"/>
+    </linearGradient>
+    <linearGradient id="goldPal" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F1C40F"/>
+      <stop offset="100%" stop-color="#B7950B"/>
+    </linearGradient>
+    <filter id="shadowPal" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.2"/>
+    </filter>
+  </defs>
+  
+  <!-- Escudo Institucional Palavecino -->
+  <g transform="translate(10, 10)" filter="url(#shadowPal)">
+    <path d="M 60 10 C 25 10 20 40 20 70 C 20 100 60 118 60 118 C 60 118 100 100 100 70 C 100 40 95 10 60 10 Z" fill="url(#greenGrad)" stroke="url(#goldPal)" stroke-width="3"/>
+    
+    <!-- Rayos de Sol y Caña de Azúcar (Identidad de Cabudare/Palavecino) -->
+    <circle cx="60" cy="50" r="18" fill="url(#goldPal)" opacity="0.9"/>
+    <!-- Montañas verdes -->
+    <path d="M 30 85 L 48 62 L 62 78 L 78 58 L 90 85 Z" fill="#1E8449"/>
+    <path d="M 22 92 C 35 88 85 88 98 92 C 95 105 60 115 60 115 C 60 115 25 105 22 92 Z" fill="#145A32"/>
+    <!-- Cinta Tricolor -->
+    <path d="M 28 102 Q 60 112 92 102" stroke="#F1C40F" stroke-width="3" fill="none"/>
+    <!-- Tres Estrellas -->
+    <polygon points="50,42 52,47 57,47 53,50 55,55 50,52 45,55 47,50 43,47 48,47" fill="#FFF"/>
+    <polygon points="60,35 62,40 67,40 63,43 65,48 60,45 55,48 57,43 53,40 58,40" fill="#FFF"/>
+    <polygon points="70,42 72,47 77,47 73,50 75,55 70,52 65,55 67,50 63,47 68,47" fill="#FFF"/>
+  </g>
+  
+  <!-- Textos Institucionales -->
+  <g transform="translate(130, 26)">
+    <text x="0" y="22" font-family="'Montserrat', sans-serif" font-size="14" font-weight="700" letter-spacing="2" fill="#7F8C8D">ALCALDÍA BOLIVARIANA</text>
+    <text x="0" y="56" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-size="36" font-weight="900" letter-spacing="2" fill="#145A32">PALAVECINO</text>
+    <rect x="0" y="66" width="260" height="3" fill="url(#goldPal)" rx="1.5"/>
+    <text x="0" y="84" font-family="'Montserrat', sans-serif" font-size="9.5" font-weight="700" letter-spacing="3" fill="#27AE60">ESTADO LARA · VENEZUELA</text>
+  </g>
+</svg>

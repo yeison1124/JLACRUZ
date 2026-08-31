@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 140" width="100%" height="100%">
+  <defs>
+    <linearGradient id="mbGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A56DB"/>
+      <stop offset="50%" stop-color="#3B9EFF"/>
+      <stop offset="100%" stop-color="#00C9FF"/>
+    </linearGradient>
+    <linearGradient id="darkMb" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0A1628"/>
+      <stop offset="100%" stop-color="#1E3A8A"/>
+    </linearGradient>
+    <filter id="mbShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="2" stdDeviation="2" flood-opacity="0.18"/>
+    </filter>
+  </defs>
+  
+  <!-- Isotipo MB tecnológico -->
+  <g transform="translate(15, 18)" filter="url(#mbShadow)">
+    <rect x="10" y="15" width="85" height="85" rx="18" fill="url(#darkMb)" stroke="url(#mbGrad)" stroke-width="2.5"/>
+    <path d="M 28 75 V 40 L 45 60 L 62 40 V 75" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+    <path d="M 68 40 H 80 C 86 40 88 44 88 48 C 88 52 85 55 80 56 C 86 57 89 61 89 67 C 89 73 85 75 78 75 H 68 V 40 Z" fill="none" stroke="url(#mbGrad)" stroke-width="4.5" stroke-linejoin="round"/>
+  </g>
+  
+  <!-- Tipografía MB ZOLUCIONES C.A. -->
+  <g transform="translate(125, 26)">
+    <text x="0" y="24" font-family="'Montserrat', sans-serif" font-size="13" font-weight="700" letter-spacing="4" fill="#64748B">PRODUCCIONES &amp; EVENTOS</text>
+    <text x="0" y="60" font-family="'Barlow Condensed', 'Arial Black', sans-serif" font-size="38" font-weight="900" letter-spacing="2" fill="#0A1628">MB ZOLUCIONES</text>
+    <rect x="0" y="70" width="245" height="3" fill="url(#mbGrad)" rx="1.5"/>
+    <text x="0" y="88" font-family="'Montserrat', sans-serif" font-size="9" font-weight="700" letter-spacing="3.5" fill="#1A56DB">COMPAÑÍA ANÓNIMA · VENEZUELA</text>
+  </g>
+</svg>

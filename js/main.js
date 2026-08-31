@@ -592,6 +592,34 @@ function iniciarNavbarScroll() {
   });
 }
 
+function iniciarMapa() {
+  const mapContainer = document.getElementById('mapaContacto');
+  if (!mapContainer || typeof L === 'undefined') return;
+
+  const lat = 10.0647;
+  const lng = -69.3570;
+
+  const map = L.map('mapaContacto').setView([lat, lng], 15);
+
+  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    maxZoom: 19,
+    attribution: '© OpenStreetMap'
+  }).addTo(map);
+
+  const marker = L.marker([lat, lng]).addTo(map);
+  marker.bindPopup(`
+    <div style="text-align:center;">
+      <strong style="color:#0a1628;">J. LACRUZ C.A.</strong><br>
+      <small style="color:#64748b;">Barquisimeto, Estado Lara, Venezuela</small><br>
+      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" style="color:#1a56db;font-weight:bold;font-size:11px;">Abrir en Google Maps ↗</a>
+    </div>
+  `).openPopup();
+
+  map.on('click', () => {
+    window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+  });
+}
+
 // #endregion
 
 // #region [EVENTOS PRINCIPALES]
@@ -601,6 +629,7 @@ document.addEventListener('DOMContentLoaded', async () => {
   iniciarNavbarScroll();
   iniciarAnimaciones();
   iniciarCarrusel();
+  iniciarMapa();
 
   const horaEl = document.getElementById('chatbotHoraInicio');
   if (horaEl) {
