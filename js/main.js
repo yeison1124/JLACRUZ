@@ -596,10 +596,10 @@ function iniciarMapa() {
   const mapContainer = document.getElementById('mapaContacto');
   if (!mapContainer || typeof L === 'undefined') return;
 
-  const lat = 10.0647;
-  const lng = -69.3570;
+  const lat = 10.0632758;
+  const lng = -69.3170799;
 
-  const map = L.map('mapaContacto').setView([lat, lng], 15);
+  const map = L.map('mapaContacto').setView([lat, lng], 17);
 
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
