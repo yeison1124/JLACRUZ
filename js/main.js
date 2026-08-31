@@ -611,12 +611,12 @@ function iniciarMapa() {
     <div style="text-align:center;">
       <strong style="color:#0a1628;">J. LACRUZ C.A.</strong><br>
       <small style="color:#64748b;">Barquisimeto, Estado Lara, Venezuela</small><br>
-      <a href="https://www.google.com/maps/search/?api=1&query=${lat},${lng}" target="_blank" style="color:#1a56db;font-weight:bold;font-size:11px;">Abrir en Google Maps ↗</a>
+      <a href="https://maps.app.goo.gl/ei45ghyYmUALrw3y9" target="_blank" style="color:#1a56db;font-weight:bold;font-size:11px;">Abrir en Google Maps ↗</a>
     </div>
   `).openPopup();
 
   map.on('click', () => {
-    window.open(`https://www.google.com/maps/search/?api=1&query=${lat},${lng}`, '_blank');
+    window.open('https://maps.app.goo.gl/ei45ghyYmUALrw3y9', '_blank');
   });
 }
 
