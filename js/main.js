@@ -1,10 +1,8 @@
-/**
- * main.js — Página pública J. LACRUZ C.A.
- * Lógica del catálogo e-commerce, carrito (localStorage),
- * chatbot (componente inteligente) y animaciones de la landing page.
+/*
+ * main.js — Logica de la pagina web publica
+ * Catalogo de productos, carrito de pedidos (localStorage), chatbot y mapa interactivo
  */
 
-// Detección automática del backend (local / hosting jlacruzca.com)
 const HOSTING_URL    = 'https://jlacruzca.com/';
 const API_BASE       = window.location.hostname.includes('jlacruzca.com') ? '/' : HOSTING_URL;
 const API_ECOMMERCE  = API_BASE + '?views=ecommercePublico';
@@ -12,19 +10,21 @@ const API_CHATBOT    = API_BASE + '?views=chatbot';
 const FOTOS_BASE     = API_BASE + 'src/assets/fotosModulos/';
 const KEY_CARRITO    = 'itemsCarritoPedido';
 
-// Tasa del dólar BCV (se actualiza desde la API de monedas)
 let tasaDolar = 36.5;
-
-// Productos cargados de la BD
 let productosData = [];
+let carouselIndex = 0;
+let carouselAutoplay = null;
 
-// #endregion
+/* Ajuste dinamico de alto de pantalla para moviles y navegadores */
+function actualizarViewport() {
+  const vh = window.innerHeight * 0.01;
+  document.documentElement.style.setProperty('--vh', `${vh}px`);
+}
+window.addEventListener('resize', actualizarViewport);
+window.addEventListener('orientationchange', actualizarViewport);
+actualizarViewport();
 
-// #region [CARRITO — localStorage (mismo key que el sistema)]
-
-/**
- * Lee el carrito del localStorage.
- */
+/* Leer el carrito guardado */
 function leerCarrito() {
   try {
     const raw = localStorage.getItem(KEY_CARRITO);
@@ -35,16 +35,12 @@ function leerCarrito() {
   }
 }
 
-/**
- * Guarda el carrito en localStorage.
- */
+/* Guardar el carrito */
 function guardarCarrito(carrito) {
   localStorage.setItem(KEY_CARRITO, JSON.stringify(carrito));
 }
 
-/**
- * Agrega un producto al carrito o aumenta su cantidad.
- */
+/* Agregar o incrementar producto en el carrito */
 function agregarAlCarrito(infoProducto) {
   const carrito = leerCarrito();
   const id = infoProducto.id_presentacion_producto;
@@ -65,9 +61,7 @@ function agregarAlCarrito(infoProducto) {
   actualizarBadgeCarrito();
 }
 
-/**
- * Renderiza todos los ítems del offcanvas del carrito.
- */
+/* Dibujar los productos en el panel del carrito */
 function renderizarOffcanvasCarrito() {
   const carrito      = leerCarrito();
   const deposito     = document.querySelector('.depositoDetallesPedido');
@@ -117,226 +111,254 @@ function renderizarOffcanvasCarrito() {
   recalcularTotalesCarrito();
 }
 
-/**
- * Recalcula precios, descuentos y totales del carrito.
- */
+/* Recalcular los montos totales del carrito */
 function recalcularTotalesCarrito() {
-  const carrito    = leerCarrito();
-  const productos  = carrito.productos || {};
-  const tipoPago   = document.querySelector('.panelCotizacionPedido .btnTipoPago.active')?.dataset.tipo_pago || 'bs';
-  const signo      = tipoPago === 'bs' ? ' Bs' : '$';
-  let totalBase    = 0;
-  let totalDescuento = 0;
-  let nroItems     = 0;
+  const panel = document.querySelector('.panelCotizacionPedido');
+  if (!panel) return;
 
-  document.querySelectorAll('.panelCotizacionPedido .signoPrecio')
-    .forEach(el => el.textContent = signo);
+  const tipoPagoActivo = panel.querySelector('.btnTipoPago.active')?.dataset.tipo_pago || 'bs';
+  const signo = tipoPagoActivo === 'usd' ? '$' : 'Bs';
 
-  document.querySelectorAll('.depositoDetallesPedido .itemPedido')
-    .forEach(itemEl => {
-      const idPres    = itemEl.dataset.id_presentacion_producto;
-      const prod      = productos[idPres];
-      if (!prod) return;
+  const items = panel.querySelectorAll('.itemPedido');
 
-      const cantidad  = prod.cantidad || 1;
-      nroItems       += cantidad;
-      const precioProd = parseFloat(prod.precio_producto || 0);
-      const cantPmp    = parseFloat(prod.cantidad_pmp    || 1);
-      let precioUnit   = precioProd * cantPmp;
+  let sumaBaseUSD  = 0;
+  let sumaMayorUSD = 0;
 
-      if (tipoPago === 'bs') precioUnit *= tasaDolar;
+  items.forEach(item => {
+    const precioBaseUSD = parseFloat(item.dataset.precio_producto) || 0;
+    const cantidad      = parseInt(item.querySelector('.cantidadItemCarrito')?.textContent || '1', 10);
+    const cantPmp       = parseInt(item.dataset.cantidad_pmp || '1', 10);
 
-      const precioMayor = precioUnit * 0.9;
-      const subtotalBase = precioUnit * cantidad;
-      const subtotalDesc = cantidad >= 20 ? subtotalBase * 0.9 : subtotalBase;
+    const precioMayorUSD = cantidad >= cantPmp ? precioBaseUSD * 0.90 : precioBaseUSD;
 
-      itemEl.querySelector('.precioBaseItem').textContent = formatearMonto(precioUnit);
-      itemEl.querySelector('.precioMayorItem').textContent = formatearMonto(precioMayor);
-      itemEl.querySelector('.cantidadSubTotalBase').textContent = formatearMonto(subtotalBase);
-      itemEl.querySelector('.cantidadSubTotalDescuento').textContent = formatearMonto(subtotalDesc);
+    const subTotalBaseUSD  = precioBaseUSD * cantidad;
+    const subTotalMayorUSD = precioMayorUSD * cantidad;
 
-      if (cantidad >= 20) {
-        itemEl.querySelector('.subTotalBase')?.classList.remove('d-none');
+    sumaBaseUSD  += subTotalBaseUSD;
+    sumaMayorUSD += subTotalMayorUSD;
+
+    const factor = tipoPagoActivo === 'usd' ? 1 : tasaDolar;
+
+    const baseItemEl  = item.querySelector('.precioBaseItem');
+    const mayorItemEl = item.querySelector('.precioMayorItem');
+    if (baseItemEl)  baseItemEl.textContent  = (precioBaseUSD * factor).toFixed(2);
+    if (mayorItemEl) mayorItemEl.textContent = (precioBaseUSD * 0.90 * factor).toFixed(2);
+
+    const subBaseEl  = item.querySelector('.cantidadSubTotalBase');
+    const subMayorEl = item.querySelector('.cantidadSubTotalDescuento');
+    if (subBaseEl)  subBaseEl.textContent  = (subTotalBaseUSD * factor).toFixed(2);
+    if (subMayorEl) subMayorEl.textContent = (subTotalMayorUSD * factor).toFixed(2);
+
+    const divSub = item.querySelector('.divSubTotalItemPedido');
+    if (divSub) {
+      const elBase  = divSub.querySelector('.subTotalBase');
+      const elMayor = divSub.querySelector('.subTotalDescuento');
+
+      if (cantidad >= cantPmp && cantPmp > 1) {
+        elBase?.classList.add('text-decoration-line-through', 'opacity-50');
+        elMayor?.classList.remove('d-none');
       } else {
-        itemEl.querySelector('.subTotalBase')?.classList.add('d-none');
+        elBase?.classList.remove('text-decoration-line-through', 'opacity-50');
+        elMayor?.classList.add('d-none');
       }
+    }
 
-      totalBase      += subtotalBase;
-      totalDescuento += subtotalDesc;
-    });
+    item.querySelectorAll('.signoPrecio').forEach(el => el.textContent = signo);
+  });
+
+  const factor = tipoPagoActivo === 'usd' ? 1 : tasaDolar;
+
+  const totalBaseFinal  = sumaBaseUSD * factor;
+  const totalMayorFinal = sumaMayorUSD * factor;
+  const descuentoTotal  = (sumaBaseUSD - sumaMayorUSD) * factor;
+
+  const cantidadTotalBaseEl = panel.querySelector('.cantidadTotalBase');
+  const cantidadTotalMayorEl = panel.querySelector('.cantidadTotalDescuento');
+  if (cantidadTotalBaseEl)  cantidadTotalBaseEl.textContent  = totalBaseFinal.toFixed(2);
+  if (cantidadTotalMayorEl) cantidadTotalMayorEl.textContent = totalMayorFinal.toFixed(2);
+
+  const elTotalBase  = panel.querySelector('.totalBase');
+  const elTotalMayor = panel.querySelector('.totalDescuento');
+  const rowDescuento = panel.querySelector('.descuentoPedidoPorMayor');
+
+  if (descuentoTotal > 0.01) {
+    elTotalBase?.classList.remove('d-none');
+    elTotalBase?.classList.add('text-decoration-line-through', 'opacity-50');
+    if (rowDescuento) {
+      rowDescuento.classList.remove('d-none');
+      const cantDescEl = rowDescuento.querySelector('.cantidadDescuentoPedidoPorMayor');
+      if (cantDescEl) cantDescEl.textContent = '-' + descuentoTotal.toFixed(2);
+    }
+  } else {
+    elTotalBase?.classList.add('d-none');
+    rowDescuento?.classList.add('d-none');
+  }
+
+  panel.querySelectorAll('.contenedorTotalPagar .signoPrecio').forEach(el => el.textContent = signo);
+}
+
+/* Actualizar la cantidad en el boton del carrito */
+function actualizarBadgeCarrito() {
+  const carrito = leerCarrito();
+  const productos = carrito.productos || {};
+  const totalItems = Object.values(productos).reduce((s, p) => s + (p.cantidad || 0), 0);
 
   const badgeNav  = document.getElementById('badgeCarritoNav');
-  const badgeCart = document.querySelector('.nroItemsPedido');
-  if (nroItems > 0) {
-    badgeNav && badgeNav.classList.remove('d-none');
-    badgeNav && (badgeNav.textContent = nroItems);
-    badgeCart && badgeCart.classList.remove('d-none');
-    badgeCart && (badgeCart.textContent = nroItems);
-  } else {
-    badgeNav && badgeNav.classList.add('d-none');
-    badgeCart && badgeCart.classList.add('d-none');
-  }
+  const badgePage = document.querySelector('.nroItemsPedido');
 
-  const descuento = totalBase - totalDescuento;
-  const descEl    = document.querySelector('.descuentoPedidoPorMayor');
-  if (descuento > 0.001) {
-    descEl?.classList.remove('d-none');
-    const cantEl = document.querySelector('.cantidadDescuentoPedidoPorMayor');
-    if (cantEl) cantEl.textContent = formatearMonto(descuento);
-  } else {
-    descEl?.classList.add('d-none');
-  }
-
-  const totalBaseEl = document.querySelector('.cantidadTotalBase');
-  const totalDescEl = document.querySelector('.cantidadTotalDescuento');
-  if (totalBaseEl) totalBaseEl.textContent = formatearMonto(totalBase);
-  if (totalDescEl) totalDescEl.textContent = formatearMonto(totalDescuento);
+  [badgeNav, badgePage].forEach(b => {
+    if (!b) return;
+    b.textContent = totalItems;
+    if (totalItems > 0) {
+      b.classList.remove('d-none');
+    } else {
+      b.classList.add('d-none');
+    }
+  });
 }
 
-/**
- * Actualiza el badge del carrito en el navbar.
- */
-function actualizarBadgeCarrito() {
-  const carrito  = leerCarrito();
-  const total    = Object.values(carrito.productos || {}).reduce((s, p) => s + (p.cantidad || 0), 0);
-  const badge    = document.getElementById('badgeCarritoNav');
-  const badgeCart = document.querySelector('.nroItemsPedido');
-  if (total > 0) {
-    badge && badge.classList.remove('d-none');
-    badge && (badge.textContent = total);
-    badgeCart && badgeCart.classList.remove('d-none');
-    badgeCart && (badgeCart.textContent = total);
-  } else {
-    badge && badge.classList.add('d-none');
-    badgeCart && badgeCart.classList.add('d-none');
+/* Cargar tasa del dolar oficial */
+async function cargarTasaDolar() {
+  try {
+    const fd = new FormData();
+    fd.append('accion', 'listarMonedas');
+    const res = await fetch(API_ECOMMERCE, { method: 'POST', body: fd });
+    const data = await res.json();
+
+    if (Array.isArray(data) && data.length > 0) {
+      const bcv = data.find(m => m.nombre_moneda?.toLowerCase().includes('bcv') || m.es_principal === '1');
+      if (bcv && parseFloat(bcv.valor_moneda) > 0) {
+        tasaDolar = parseFloat(bcv.valor_moneda);
+      }
+    }
+  } catch {
+    tasaDolar = 36.5;
   }
 }
 
-function formatearMonto(valor) {
-  return parseFloat(valor || 0).toFixed(2);
-}
-
-// #endregion
-
-// #region [CATÁLOGO — CARGA Y RENDERIZADO GRID]
-
-/**
- * Obtiene los productos del endpoint público y los renderiza.
- */
+/* Cargar catalogo desde la base de datos */
 async function cargarCatalogo() {
+  const loadingEl = document.getElementById('catalogoLoadingState');
+  const gridEl    = document.getElementById('catalogoGridWrapper');
+  const vacioEl   = document.getElementById('catalogoVacioState');
+
   try {
     const fd = new FormData();
     fd.append('accion', 'listarCatalogo');
-
-    const res  = await fetch(API_ECOMMERCE, { method: 'POST', body: fd });
+    const res = await fetch(API_ECOMMERCE, { method: 'POST', body: fd });
     const data = await res.json();
 
-    if (data?.icono === 'error') {
-      mostrarEstadoCatalogo('vacio');
-      return;
+    if (Array.isArray(data) && data.length > 0) {
+      productosData = data;
+      renderizarCategorias(productosData);
+      renderizarTarjetasCatalogo(productosData);
+      loadingEl?.classList.add('d-none');
+      gridEl?.classList.remove('d-none');
+    } else {
+      loadingEl?.classList.add('d-none');
+      vacioEl?.classList.remove('d-none');
     }
-
-    productosData = Array.isArray(data) ? data : [];
-
-    if (productosData.length === 0) {
-      mostrarEstadoCatalogo('vacio');
-      return;
-    }
-
-    generarFiltrosCategorias(productosData);
-    renderizarGridCatalogo(productosData);
-    mostrarEstadoCatalogo('grid');
   } catch (err) {
-    console.error('Error cargando catálogo:', err);
-    mostrarEstadoCatalogo('vacio');
+    console.error('Error al cargar catalogo:', err);
+    loadingEl?.classList.add('d-none');
+    vacioEl?.classList.remove('d-none');
   }
 }
 
-function mostrarEstadoCatalogo(estado) {
-  const loading = document.getElementById('catalogoLoadingState');
-  const grid    = document.getElementById('catalogoGridWrapper');
-  const vacio   = document.getElementById('catalogoVacioState');
-
-  loading && loading.classList.add('d-none');
-  grid    && grid.classList.add('d-none');
-  vacio   && vacio.classList.add('d-none');
-
-  if (estado === 'grid') {
-    grid && grid.classList.remove('d-none');
-  } else if (estado === 'vacio') {
-    vacio && vacio.classList.remove('d-none');
-  } else {
-    loading && loading.classList.remove('d-none');
-  }
-}
-
-function generarFiltrosCategorias(productos) {
-  const categorias = [
-    ...new Set(productos.map(p => p.nombre_categoria_producto || 'General'))
-  ];
+/* Generar botones de filtro por categoria */
+function renderizarCategorias(productos) {
   const contenedor = document.getElementById('filtrosCategorias');
   if (!contenedor) return;
 
-  contenedor.innerHTML = `
-    <button class="filtro-btn botonCategoriaItems active" data-cat="todos">Todos</button>
-  `;
+  const categorias = new Set();
+  productos.forEach(p => {
+    if (p.nombre_categoria) categorias.add(p.nombre_categoria.trim());
+  });
+
+  contenedor.innerHTML = '<button class="filtro-btn botonCategoriaItems active" data-cat="todos">Todos</button>';
 
   categorias.forEach(cat => {
     const btn = document.createElement('button');
-    btn.className  = 'filtro-btn botonCategoriaItems';
+    btn.className = 'filtro-btn botonCategoriaItems';
     btn.dataset.cat = cat;
     btn.textContent = cat;
+    btn.addEventListener('click', () => {
+      contenedor.querySelectorAll('.botonCategoriaItems').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      filtrarCatalogo(cat);
+    });
     contenedor.appendChild(btn);
-  });
-
-  contenedor.addEventListener('click', e => {
-    const btn = e.target.closest('.botonCategoriaItems');
-    if (!btn) return;
-    contenedor.querySelectorAll('.botonCategoriaItems').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    filtrarCatalogo(btn.dataset.cat);
   });
 }
 
-/**
- * Renderiza el Grid de Tarjetas del Catálogo Centradas con Ícono SVG.
- */
-function renderizarGridCatalogo(productos) {
-  const grid = document.getElementById('catalogoGridWrapper');
-  if (!grid) return;
+/* Filtrar productos por busqueda y categoria */
+function filtrarCatalogo(catFiltro) {
+  const texto = document.getElementById('buscadorCatalogoPagina')?.value.toLowerCase().trim() || '';
 
-  grid.innerHTML = '';
+  const filtrados = productosData.filter(p => {
+    const coincideCat = catFiltro === 'todos' || p.nombre_categoria?.trim() === catFiltro;
+    const coincideTexto = !texto ||
+      p.nombre_producto?.toLowerCase().includes(texto) ||
+      p.nombre_presentacion?.toLowerCase().includes(texto) ||
+      p.nombre_categoria?.toLowerCase().includes(texto);
+    return coincideCat && coincideTexto;
+  });
+
+  renderizarTarjetasCatalogo(filtrados);
+}
+
+/* Renderizar tarjetas del catalogo */
+function renderizarTarjetasCatalogo(productos) {
+  const gridEl  = document.getElementById('catalogoGridWrapper');
+  const vacioEl = document.getElementById('catalogoVacioState');
+
+  if (!gridEl) return;
+  gridEl.innerHTML = '';
+
+  if (productos.length === 0) {
+    gridEl.classList.add('d-none');
+    vacioEl?.classList.remove('d-none');
+    return;
+  }
+
+  vacioEl?.classList.add('d-none');
+  gridEl.classList.remove('d-none');
 
   productos.forEach(prod => {
-    const foto = prod.foto_presentacion && prod.foto_presentacion !== ''
+    const col = document.createElement('div');
+    col.className = 'col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch';
+
+    const precioUSD = parseFloat(prod.precio_producto) || 0;
+    const precioBs  = (precioUSD * tasaDolar).toFixed(2);
+
+    const fotoUrl = prod.foto_presentacion && prod.foto_presentacion !== ''
       ? FOTOS_BASE + 'presentaciones_productos/' + prod.foto_presentacion
       : './img/aseo-limpieza.jpg';
 
-    const precioDolar = parseFloat(prod.precio_dolar || 0).toFixed(2);
-    const precioBS    = parseFloat(prod.precio_bs    || 0).toFixed(2);
-    const categoria   = prod.nombre_categoria_producto || 'General';
-
-    const col = document.createElement('div');
-    col.className = 'col-sm-6 col-lg-4 col-xl-3 producto-item-wrap';
-    col.dataset.cat = categoria;
-    col.dataset.nombre = ((prod.nombre_producto || '') + ' ' + (prod.nombre_presentacion || '')).toLowerCase();
+    const infoObj = JSON.stringify({
+      id_producto: prod.id_producto,
+      id_presentacion_producto: prod.id_presentacion_producto,
+      nombre_producto: prod.nombre_producto,
+      nombre_presentacion: prod.nombre_presentacion,
+      precio_producto: precioUSD,
+      cantidad_pmp: prod.cantidad_pmp || 1,
+      foto_presentacion: prod.foto_presentacion || ''
+    }).replace(/"/g, '&quot;');
 
     col.innerHTML = `
-      <div class="producto-card shadow-sm h-100">
+      <div class="producto-card w-100">
         <div class="producto-card-img-wrap">
-          <span class="producto-card-badge">${escaparHTML(categoria)}</span>
-          <img src="${escaparHTML(foto)}" alt="${escaparHTML(prod.nombre_producto || '')}" class="producto-card-img" onerror="this.onerror=null;this.src='./img/logo-footer.png'">
+          <span class="producto-card-badge">${escaparHTML(prod.nombre_categoria || 'Suministros')}</span>
+          <img src="${fotoUrl}" alt="${escaparHTML(prod.nombre_producto)}" class="producto-card-img" onerror="this.src='./img/aseo-limpieza.jpg'">
         </div>
         <div class="producto-card-body">
-          <h5 class="producto-card-title">${escaparHTML(prod.nombre_producto || '')}</h5>
-          <p class="producto-card-pres mb-2">Presentación: ${escaparHTML(prod.nombre_presentacion || 'Unidad')}</p>
-
+          <h5 class="producto-card-title">${escaparHTML(prod.nombre_producto)}</h5>
+          <p class="producto-card-pres">${escaparHTML(prod.nombre_presentacion || 'Unidad')}</p>
           <div class="producto-card-prices">
-            <span class="precio-usd-tag">$${precioDolar}</span>
-            <span class="precio-bs-tag">/ ${precioBS} Bs</span>
+            <span class="precio-usd-tag">$${precioUSD.toFixed(2)}</span>
+            <span class="precio-bs-tag">/ ${precioBs} Bs</span>
           </div>
-
-          <button class="btn btn-dark w-100 rounded-pill py-2 fw-bold btnAggProdCarritoPagina shadow-sm d-flex align-items-center justify-content-center gap-2" data-info='${JSON.stringify(prod).replace(/'/g, "&#39;")}'>
+          <button class="btn btn-primary w-100 rounded-pill py-2 btnAggProdCarritoPagina d-flex align-items-center justify-content-center gap-2" data-info="${infoObj}">
             <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="9" cy="21" r="1"></circle>
               <circle cx="20" cy="21" r="1"></circle>
@@ -347,53 +369,52 @@ function renderizarGridCatalogo(productos) {
         </div>
       </div>
     `;
-
-    grid.appendChild(col);
+    gridEl.appendChild(col);
   });
 }
 
-function filtrarCatalogo(categoria) {
-  const buscador = document.getElementById('buscadorCatalogoPagina');
-  const termino  = buscador ? buscador.value.toLowerCase().trim() : '';
-
-  document.querySelectorAll('#catalogoGridWrapper .producto-item-wrap')
-    .forEach(col => {
-      const catCol = col.dataset.cat || '';
-      const texto  = col.dataset.nombre || '';
-      const matchCat = categoria === 'todos' || catCol === categoria;
-      const matchBus = termino === '' || texto.includes(termino);
-      col.style.display = (matchCat && matchBus) ? '' : 'none';
-    });
-}
-
+/* Escapar caracteres HTML */
 function escaparHTML(str) {
-  const div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
+  if (!str) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
 }
 
-// #endregion
+/* Enviar consulta por WhatsApp */
+function enviarContactoWA() {
+  const nombre   = document.getElementById('contactoNombre')?.value.trim();
+  const telefono = document.getElementById('contactoTelefono')?.value.trim();
+  const mensaje  = document.getElementById('contactoMensaje')?.value.trim();
 
-// #region [CHATBOT & SECRET KEY]
-
-function abrirChatbotPagina(mensajeInicial) {
-  const ventana = document.getElementById('chatbot-window');
-  ventana && ventana.classList.remove('d-none');
-  if (mensajeInicial) {
-    setTimeout(() => enviarMensajeChatbot(mensajeInicial), 300);
+  if (!nombre || !telefono || !mensaje) {
+    if (typeof Swal !== 'undefined') {
+      Swal.fire({
+        icon: 'warning',
+        title: 'Campos incompletos',
+        text: 'Por favor complete su nombre, teléfono y mensaje.',
+        confirmButtonColor: '#1a56db'
+      });
+    } else {
+      alert('Por favor complete todos los campos.');
+    }
+    return;
   }
+
+  const textoWA = `Hola J. LACRUZ C.A., mi nombre es *${nombre}* (${telefono}).\n\n*Mensaje:* ${mensaje}`;
+  const url = `https://api.whatsapp.com/send?phone=584245085666&text=${encodeURIComponent(textoWA)}`;
+  window.open(url, '_blank');
 }
 
-function enviarSugerenciaChatbot(texto) {
-  const input = document.getElementById('chatbot-input');
-  if (input) {
-    input.value = texto;
-    document.getElementById('chatbot-form')?.dispatchEvent(
-      new Event('submit', { cancelable: true, bubbles: true })
-    );
-  }
+/* Alternar menu movil */
+function toggleMenu() {
+  const menu = document.getElementById('mobileMenu');
+  if (menu) menu.classList.toggle('active');
 }
 
+/* Agregar mensaje al chat */
 function agregarMensajeChatbot(texto, tipo) {
   const contenedor = document.getElementById('chatbot-messages');
   if (!contenedor) return;
@@ -416,11 +437,7 @@ function agregarMensajeChatbot(texto, tipo) {
   contenedor.scrollTop = contenedor.scrollHeight;
 }
 
-/**
- * Envía el mensaje al chatbot llamando a la Vercel Serverless Function /api/chat.
- * /api/chat lee process.env.CHATBOT_SECRET_KEY del lado del servidor de Vercel
- * y la pinta en las cabeceras HTTP de forma 100% segura sin exponerla al cliente.
- */
+/* Enviar mensaje al chatbot */
 async function enviarMensajeChatbot(mensaje) {
   if (!mensaje.trim()) return;
   agregarMensajeChatbot(mensaje, 'user');
@@ -443,7 +460,6 @@ async function enviarMensajeChatbot(mensaje) {
   try {
     let res, data;
 
-    // 1. Intentar llamar al Vercel Serverless Endpoint /api/chat
     try {
       res = await fetch('/api/chat', {
         method: 'POST',
@@ -454,10 +470,8 @@ async function enviarMensajeChatbot(mensaje) {
         data = await res.json();
       }
     } catch {
-      // Fallback local/backend si no está en Vercel Serverless
     }
 
-    // 2. Si /api/chat no respondió en el entorno actual, llamar al proxy PHP del ERP
     if (!data || data.error) {
       const fd = new FormData();
       fd.append('accion', 'enviarMensaje');
@@ -485,56 +499,12 @@ async function enviarMensajeChatbot(mensaje) {
   }
 }
 
-// #endregion
-
-// #region [NAVBAR, MENÚ MÓVIL Y CONTACTO]
-
-function toggleMenu() {
-  const menu = document.getElementById('mobileMenu');
-  if (menu) {
-    menu.classList.toggle('active');
-  }
+/* Enviar sugerencia del chatbot */
+function enviarSugerenciaChatbot(texto) {
+  enviarMensajeChatbot(texto);
 }
 
-function enviarContactoWA() {
-  const nombre   = document.getElementById('contactoNombre')?.value.trim();
-  const telefono = document.getElementById('contactoTelefono')?.value.trim();
-  const mensaje  = document.getElementById('contactoMensaje')?.value.trim();
-
-  if (!nombre || !mensaje) {
-    alert('Por favor completa tu nombre y mensaje.');
-    return;
-  }
-
-  const texto = encodeURIComponent(`Hola J. LACRUZ C.A., soy ${nombre} (${telefono || 'sin teléfono'}). Requiero: ${mensaje}`);
-  window.open(`https://api.whatsapp.com/send?phone=584245085666&text=${texto}`, '_blank');
-}
-
-async function cargarTasaDolar() {
-  try {
-    const fd = new FormData();
-    fd.append('accion', 'listarMonedas');
-    const res  = await fetch(API_ECOMMERCE, { method: 'POST', body: fd });
-    const data = await res.json();
-    if (Array.isArray(data)) {
-      const bcv = data.find(m => m.id_moneda == 1 || m.id_moneda == '1');
-      if (bcv && bcv.valor_moneda) {
-        tasaDolar = parseFloat(bcv.valor_moneda);
-      }
-    }
-  } catch {
-    // Tasa por defecto
-  }
-}
-
-// #endregion
-
-// #region [CAROUSEL Y ANIMACIONES]
-
-let carouselIndex = 0;
-let carouselAutoplay = null;
-const CARD_WIDTH = 320 + 24;
-
+/* Carrusel de servicios */
 function iniciarCarrusel() {
   const track = document.getElementById('carouselTrack');
   const outer = document.getElementById('carouselOuter');
@@ -543,7 +513,8 @@ function iniciarCarrusel() {
 
   const cards = track.querySelectorAll('.service-card');
   const total = cards.length;
-  const visible = Math.floor(outer.clientWidth / CARD_WIDTH) || 1;
+  const cardWidth = 344;
+  const visible = Math.floor(outer.clientWidth / cardWidth) || 1;
   const maxIndex = Math.max(0, total - visible);
 
   if (dots) {
@@ -558,7 +529,7 @@ function iniciarCarrusel() {
 
   function moverCarrusel(idx) {
     carouselIndex = Math.max(0, Math.min(idx, maxIndex));
-    track.style.transform = `translateX(-${carouselIndex * CARD_WIDTH}px)`;
+    track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
     dots && dots.querySelectorAll('.carousel-dot').forEach((d, i) => {
       d.classList.toggle('active', i === carouselIndex);
     });
@@ -570,6 +541,7 @@ function iniciarCarrusel() {
   }, 4000);
 }
 
+/* Observador de animaciones */
 function iniciarAnimaciones() {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(e => {
@@ -585,6 +557,7 @@ function iniciarAnimaciones() {
   });
 }
 
+/* Efecto de sombra al desplazar la barra de navegacion */
 function iniciarNavbarScroll() {
   const nav = document.getElementById('navbar');
   window.addEventListener('scroll', () => {
@@ -592,6 +565,7 @@ function iniciarNavbarScroll() {
   });
 }
 
+/* Inicializar mapa interactivo */
 function iniciarMapa() {
   const mapContainer = document.getElementById('mapaContacto');
   if (!mapContainer || typeof L === 'undefined') return;
@@ -611,7 +585,7 @@ function iniciarMapa() {
     <div style="text-align:center;">
       <strong style="color:#0a1628;">J. LACRUZ C.A.</strong><br>
       <small style="color:#64748b;">Barquisimeto, Estado Lara, Venezuela</small><br>
-      <a href="https://maps.app.goo.gl/ei45ghyYmUALrw3y9" target="_blank" style="color:#1a56db;font-weight:bold;font-size:11px;">Abrir en Google Maps ↗</a>
+      <a href="https://maps.app.goo.gl/ei45ghyYmUALrw3y9" target="_blank" style="color:#1a56db;font-weight:bold;font-size:11px;">Abrir en Google Maps</a>
     </div>
   `).openPopup();
 
@@ -620,12 +594,8 @@ function iniciarMapa() {
   });
 }
 
-// #endregion
-
-// #region [EVENTOS PRINCIPALES]
-
+/* Eventos al cargar el documento */
 document.addEventListener('DOMContentLoaded', async () => {
-
   iniciarNavbarScroll();
   iniciarAnimaciones();
   iniciarCarrusel();
@@ -646,7 +616,6 @@ document.addEventListener('DOMContentLoaded', async () => {
   await cargarTasaDolar();
   await cargarCatalogo();
 
-  // Abrir offcanvas del carrito al hacer clic en cualquier botón con data-bs-target="#cartOffcanvas"
   document.addEventListener('click', e => {
     const btn = e.target.closest('[data-bs-target="#cartOffcanvas"]');
     if (btn) {
@@ -658,7 +627,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Delegación: Agregar al carrito
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btnAggProdCarritoPagina');
     if (!btn) return;
@@ -667,7 +635,12 @@ document.addEventListener('DOMContentLoaded', async () => {
       agregarAlCarrito(info);
 
       btn.classList.add('btn-success');
-      btn.innerHTML = '✔ ¡Agregado!';
+      btn.innerHTML = `
+        <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        <span>Agregado</span>
+      `;
       setTimeout(() => {
         btn.classList.remove('btn-success');
         btn.innerHTML = `
@@ -690,7 +663,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Delegación: Cambiar tipo de pago
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btnTipoPago');
     if (!btn) return;
@@ -705,7 +677,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     recalcularTotalesCarrito();
   });
 
-  // Suma
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btnSumItemPedido');
     if (!btn) return;
@@ -721,7 +692,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Resta
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btnResItemPedido');
     if (!btn) return;
@@ -740,7 +710,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Eliminar
   document.addEventListener('click', e => {
     const btn = e.target.closest('.btnEliItemPedido');
     if (!btn) return;
@@ -756,7 +725,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     }
   });
 
-  // Buscador del catálogo
   const buscador = document.getElementById('buscadorCatalogoPagina');
   if (buscador) {
     buscador.addEventListener('input', () => {
@@ -765,7 +733,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
   }
 
-  // Chatbot toggle
   document.getElementById('chatbot-toggle-btn')?.addEventListener('click', () => {
     const ventana = document.getElementById('chatbot-window');
     ventana && ventana.classList.toggle('d-none');
@@ -783,7 +750,4 @@ document.addEventListener('DOMContentLoaded', async () => {
     input.value = '';
     await enviarMensajeChatbot(texto);
   });
-
 });
-
-// #endregion
