@@ -326,7 +326,7 @@ function renderizarTarjetasCatalogo(productos) {
 
   productos.forEach(prod => {
     const col = document.createElement('div');
-    col.className = 'col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch';
+    col.className = 'col-12 col-sm-6 col-md-4 col-lg-3 d-flex align-items-stretch';
 
     const precioUSD = parseFloat(prod.precio_producto) || 0;
     const precioBs  = (precioUSD * tasaDolar).toFixed(2);
@@ -512,22 +512,31 @@ function iniciarCarrusel() {
   if (!track || !outer) return;
 
   const cards = track.querySelectorAll('.service-card');
-  const total = cards.length;
-  const cardWidth = 344;
-  const visible = Math.floor(outer.clientWidth / cardWidth) || 1;
-  const maxIndex = Math.max(0, total - visible);
+  if (!cards.length) return;
 
-  if (dots) {
-    dots.innerHTML = '';
-    for (let i = 0; i <= maxIndex; i++) {
-      const dot = document.createElement('span');
-      dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
-      dot.addEventListener('click', () => moverCarrusel(i));
-      dots.appendChild(dot);
+  function obtenerAnchoCard() {
+    return cards[0].offsetWidth + 20;
+  }
+
+  function recalcular() {
+    const cardWidth = obtenerAnchoCard();
+    const visible = Math.floor(outer.clientWidth / cardWidth) || 1;
+    const maxIndex = Math.max(0, cards.length - visible);
+
+    if (dots) {
+      dots.innerHTML = '';
+      for (let i = 0; i <= maxIndex; i++) {
+        const dot = document.createElement('span');
+        dot.className = 'carousel-dot' + (i === carouselIndex ? ' active' : '');
+        dot.addEventListener('click', () => moverCarrusel(i));
+        dots.appendChild(dot);
+      }
     }
+    return { cardWidth, maxIndex };
   }
 
   function moverCarrusel(idx) {
+    const { cardWidth, maxIndex } = recalcular();
     carouselIndex = Math.max(0, Math.min(idx, maxIndex));
     track.style.transform = `translateX(-${carouselIndex * cardWidth}px)`;
     dots && dots.querySelectorAll('.carousel-dot').forEach((d, i) => {
@@ -535,10 +544,17 @@ function iniciarCarrusel() {
     });
   }
 
+  window.addEventListener('resize', () => moverCarrusel(carouselIndex));
+
   carouselAutoplay && clearInterval(carouselAutoplay);
   carouselAutoplay = setInterval(() => {
+    const cardWidth = obtenerAnchoCard();
+    const visible = Math.floor(outer.clientWidth / cardWidth) || 1;
+    const maxIndex = Math.max(0, cards.length - visible);
     moverCarrusel(carouselIndex >= maxIndex ? 0 : carouselIndex + 1);
   }, 4000);
+
+  recalcular();
 }
 
 /* Observador de animaciones */
