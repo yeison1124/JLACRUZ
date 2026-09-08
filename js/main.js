@@ -411,7 +411,12 @@ function enviarContactoWA() {
 /* Alternar menu movil */
 function toggleMenu() {
   const menu = document.getElementById('mobileMenu');
-  if (menu) menu.classList.toggle('active');
+  const btn  = document.getElementById('hamburgerBtn');
+  if (menu) {
+    const isActive = menu.classList.toggle('active');
+    btn && btn.classList.toggle('active', isActive);
+    document.body.style.overflow = isActive ? 'hidden' : '';
+  }
 }
 
 /* Agregar mensaje al chat */
